@@ -1,0 +1,7 @@
+20180423_RC_Populated_DATA.csv
+-> 원본데이터 랜덤 확장
+-> 이중에서 RandTEST.csv 뽑음
+
+20180427_RC_Populated_DATA_Isolated_Train.csv
+IsolatedTEST.csv
+-> Test와 Train 완전 분리
