@@ -570,6 +570,7 @@ cbar6 = plt.colorbar(im6, cax=cax6, ticks=MultipleLocator(0.2), format="%.1f")
 
 plt.show()
 
+'''
 plt.plot(bias_model_1_layer_1)
 plt.plot(bias_model_1_layer_2)
 plt.plot(bias_model_1_layer_3)
@@ -577,7 +578,25 @@ plt.plot(bias_model_2_layer_1)
 plt.plot(bias_model_2_layer_2)
 plt.plot(bias_model_2_layer_3)
 plt.show()
+'''
 
+bias_figure = plt.figure()
+bias_fig = bias_figure.add_subplot(1,1,1)
+bias_fig.set_title("Bias Values for All Layers")
+bias_fig.set_xlabel("per NODE")
+# bias_fig.axes.get_xaxis().set_ticks([]) # It hide grid lines
+bias_fig.axes.get_xaxis().set_ticklabels([]) # It remains grid line
+# bias_fig.axes.get_xaxis().set_visible(False) # It hide all ??
+bias_fig.set_ylabel("bias value")
+bias_fig.plot(bias_model_1_layer_1, color='b', marker=".", label="Model 1 - Layer 1", linestyle="--")
+bias_fig.plot(bias_model_1_layer_2, color='g', marker=".", label="Model 1 - Layer 2", linestyle="--")
+bias_fig.plot(bias_model_1_layer_3, color='r', marker=".", label="Model 1 - Layer 3", linestyle="--")
+bias_fig.plot(bias_model_2_layer_1, color='c', marker=".", label="Model 2 - Layer 1", linestyle="--")
+bias_fig.plot(bias_model_2_layer_2, color='m', marker=".", label="Model 2 - Layer 2", linestyle="--")
+bias_fig.plot(bias_model_2_layer_3, color='y', marker=".", label="Model 2 - Layer 3", linestyle="--")
+bias_fig.legend(loc="best")
+bias_fig.grid(linestyle=':', linewidth=1)
+plt.show()
 
 # Evaluate the model using the data contained in FILE_TEST
 # Return value will contain evaluation_metrics such as: loss & average_loss
