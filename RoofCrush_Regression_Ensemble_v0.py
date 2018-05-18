@@ -1,7 +1,6 @@
 ####################################################
 ####                                            ####
 #### 2018.04.25 SUNGHUN, CHANG                  ####
-#### Safety CAE TEAM #1, HYUNDAI MOTOR GROUP    ####
 ####                                            ####
 #### For BIW Roofcrush Performance Prediction   ####
 ####                                            ####
