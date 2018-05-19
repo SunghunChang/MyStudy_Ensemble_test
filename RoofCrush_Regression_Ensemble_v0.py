@@ -6,6 +6,7 @@
 ####                                            ####
 ####################################################
 
+import argparse
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -13,8 +14,14 @@ from matplotlib.colors import LogNorm
 from matplotlib.ticker import MultipleLocator
 import os
 import sys
-
 import six.moves.urllib.request as request
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--epoch', type=int, default=500, help='Number of Train Epoch. Default : 500')
+parser.add_argument('--shuffle', type=int, default=256, help='Number of Train shuffle. Default : 256')
+args = parser.parse_args()
+# print(args.epoch)
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -49,6 +56,8 @@ print()
 print("        ** Default PATH : {}".format(PATH))
 print("        ** TRAIN : {}".format(FILE_TRAIN))
 print("        ** TEST : {}".format(FILE_TEST))
+print("         -- Number of Train Epoch : {}".format(args.epoch))
+print("         -- Number of Train Shuffle : {}".format(args.shuffle))
 print()
 
 # Create features
@@ -443,13 +452,13 @@ tf.logging.info("...done constructing classifier")
 
 # 1st MODEL TRAIN
 tf.logging.info("Before Train 1st MODEL")
-train_result = classifier.train(input_fn=lambda: my_input_fn(FILE_TRAIN, 500, 256)) # file path, repeat, shuffle
+train_result = classifier.train(input_fn=lambda: my_input_fn(FILE_TRAIN, args.epoch, args.shuffle)) # file path, repeat, shuffle
 tf.logging.info("...done Train 1st MODEL")
 tf.logging.info("{}".format(train_result))
 
 # 2nd MODEL TRAIN
 tf.logging.info("Before Train 2nd MODEL")
-train_result_2nd = classifier_2nd.train(input_fn=lambda: my_input_fn(FILE_TRAIN, 500, 256)) # file path, repeat, shuffle
+train_result_2nd = classifier_2nd.train(input_fn=lambda: my_input_fn(FILE_TRAIN, args.epoch, args.shuffle)) # file path, repeat, shuffle
 tf.logging.info("...done Train 2nd MODEL")
 tf.logging.info("{}".format(train_result_2nd))
 
