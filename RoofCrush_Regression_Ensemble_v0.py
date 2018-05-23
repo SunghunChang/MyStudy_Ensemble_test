@@ -119,7 +119,7 @@ tf.logging.info("Before classifier construction")
 tf.logging.info("1st MODEL CONSTRUCTION")
 
 classifier = tf.estimator.Estimator(model_fn=models.my_model_fn,
-                                    model_dir="./model_1",
+                                    model_dir="./model_" + "1",
                                     params={
                                         "feature_columns" : models.feature_columns
                                     }
@@ -127,11 +127,13 @@ classifier = tf.estimator.Estimator(model_fn=models.my_model_fn,
 
 tf.logging.info("2nd MODEL CONSTRUCTION")
 classifier_2nd = tf.estimator.Estimator(model_fn=models.my_model_fn_2,
-                                        model_dir="./model_2",
+                                        model_dir="./model_" + "2",
                                         params = {
                                             "feature_columns": models.feature_columns
                                         }
                                         )
+
+classifier_list = [classifier, classifier_2nd]
 
 tf.logging.info("...done constructing classifier")
 
@@ -154,7 +156,7 @@ tf.logging.info("...done constructing classifier")
 
 # 1st MODEL TRAIN
 tf.logging.info("Before Train 1st MODEL")
-train_result = classifier.train(input_fn=lambda: my_input_fn(FILE_TRAIN, args.epoch, args.shuffle)) # file path, repeat, shuffle
+train_result = classifier_list[0].train(input_fn=lambda: my_input_fn(FILE_TRAIN, args.epoch, args.shuffle)) # file path, repeat, shuffle
 tf.logging.info("...done Train 1st MODEL")
 tf.logging.info("{}".format(train_result))
 
