@@ -118,8 +118,6 @@ tf.logging.info("Before classifier construction")
 
 tf.logging.info("1st MODEL CONSTRUCTION")
 
-#test = Model_Class.Model.my_native_model()
-
 classifier = tf.estimator.Estimator(model_fn=models.my_model_fn,
                                     model_dir="./model_1",
                                     params={
