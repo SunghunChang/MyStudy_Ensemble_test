@@ -124,14 +124,16 @@ classifier = tf.estimator.Estimator(model_fn=models.my_model_fn,
                                     model_dir="./model_1",
                                     params={
                                         "feature_columns" : models.feature_columns
-                                    })  # Path to where checkpoints etc are stored
+                                    }
+                                    )  # Path to where checkpoints etc are stored
 
 tf.logging.info("2nd MODEL CONSTRUCTION")
 classifier_2nd = tf.estimator.Estimator(model_fn=models.my_model_fn_2,
                                         model_dir="./model_2",
                                         params = {
                                             "feature_columns": models.feature_columns
-                                        })
+                                        }
+                                        )
 
 tf.logging.info("...done constructing classifier")
 
