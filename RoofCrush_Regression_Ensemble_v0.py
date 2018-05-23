@@ -62,13 +62,16 @@ print("         -- Number of Train Epoch : {}".format(args.epoch))
 print("         -- Number of Train Shuffle : {}".format(args.shuffle))
 print()
 
-# Create features
-feature_names = ['vehicle', 'Mp01', 'Mp02', 'Mp03', 'Mp04', 'Mp05', 'Mp06', 'Mp07', 'Mp08', 'Mp09', 'Mp10', 'Mp11', 'Mp12']
-
+## Create features
+#feature_names = ['vehicle', 'Mp01', 'Mp02', 'Mp03', 'Mp04', 'Mp05', 'Mp06', 'Mp07', 'Mp08', 'Mp09', 'Mp10', 'Mp11', 'Mp12']
+#
 # All our inputs are feature columns of type numeric_column
-vehicle = tf.feature_column.categorical_column_with_vocabulary_list('vehicle', ['Small', 'Mid', 'RV'])
-feature_columns = [
-    tf.feature_column.indicator_column(vehicle),
+#vehicle = tf.feature_column.categorical_column_with_vocabulary_list('vehicle', ['Small', 'Mid', 'RV'])
+#feature_columns = [
+#    tf.feature_column.indicator_column(vehicle)]
+#for k in range(1,13):
+#    feature_columns.append(tf.feature_column.numeric_column(feature_names[k]))
+'''
     tf.feature_column.numeric_column(feature_names[1]),
     tf.feature_column.numeric_column(feature_names[2]),
     tf.feature_column.numeric_column(feature_names[3]),
@@ -80,8 +83,9 @@ feature_columns = [
     tf.feature_column.numeric_column(feature_names[9]),
     tf.feature_column.numeric_column(feature_names[10]),
     tf.feature_column.numeric_column(feature_names[11]),
-    tf.feature_column.numeric_column(feature_names[12]),
+    tf.feature_column.numeric_column(feature_names[12])
 ]
+'''
 
 # Create an input function reading a file using the Dataset API
 # Then provide the results to the Estimator API
@@ -92,7 +96,7 @@ def my_input_fn(file_path, repeat_count=1, shuffle_count=1):
         label = parsed_line[-1]  # Last element is the label
         del parsed_line[-1]  # Delete last element
         features = parsed_line  # Everything but last elements are the features
-        d = dict(zip(feature_names, features)), label
+        d = dict(zip(models.feature_names, features)), label
         return d
 
     with tf.name_scope('DATA_Feeding'):
@@ -119,14 +123,14 @@ tf.logging.info("1st MODEL CONSTRUCTION")
 classifier = tf.estimator.Estimator(model_fn=models.my_model_fn,
                                     model_dir="./model_1",
                                     params={
-                                        "feature_columns" : feature_columns
+                                        "feature_columns" : models.feature_columns
                                     })  # Path to where checkpoints etc are stored
 
 tf.logging.info("2nd MODEL CONSTRUCTION")
 classifier_2nd = tf.estimator.Estimator(model_fn=models.my_model_fn_2,
                                         model_dir="./model_2",
                                         params = {
-                                            "feature_columns": feature_columns
+                                            "feature_columns": models.feature_columns
                                         })
 
 tf.logging.info("...done constructing classifier")
@@ -402,7 +406,7 @@ def new_input_fn():
     def decode(x):
         print(tf.shape(x))
         x = tf.split(x, 13)  # Need to split into our 13 features
-        return dict(zip(feature_names, x))  # To build a dict of them
+        return dict(zip(models.feature_names, x))  # To build a dict of them
 
     dataset = tf.data.Dataset.from_tensor_slices(prediction_input)
     dataset = dataset.map(decode)

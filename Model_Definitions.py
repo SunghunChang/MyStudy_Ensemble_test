@@ -6,6 +6,14 @@
 
 import tensorflow as tf
 
+# Create features
+feature_names = ['vehicle', 'Mp01', 'Mp02', 'Mp03', 'Mp04', 'Mp05', 'Mp06', 'Mp07', 'Mp08', 'Mp09', 'Mp10', 'Mp11', 'Mp12']
+
+vehicle = tf.feature_column.categorical_column_with_vocabulary_list('vehicle', ['Small', 'Mid', 'RV'])
+feature_columns = [tf.feature_column.indicator_column(vehicle)]
+for k in range(1,13):
+    feature_columns.append(tf.feature_column.numeric_column(feature_names[k]))
+
 # Definition of 1st Model
 def my_model_fn(
     features, # This is batch_features from input_fn
