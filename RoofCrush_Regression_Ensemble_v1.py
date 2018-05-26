@@ -66,11 +66,30 @@ print()
 # Create a custom estimator using my_model_fn
 tf.logging.info("Before classifier construction")
 
+validation_metrics = {"accuracy":
+        tf.contrib.learn.MetricSpec(
+            metric_fn=tf.contrib.metrics.streaming_accuracy,
+            prediction_key="classes"
+        ),
+        "precision":
+        tf.contrib.learn.MetricSpec(
+            metric_fn=tf.contrib.metrics.streaming_precision,
+            prediction_key="classes"
+        ),
+        "recall":
+        tf.contrib.learn.MetricSpec(
+            metric_fn=tf.contrib.metrics.streaming_recall,
+            prediction_key="classes"
+        )}
+
 classifier_list = []
+validation_monitor_list = []
+
 for k in range(1, Num_Of_Models + 1):
     tf.logging.info("MODEL #" + str(k) + " CONSTRUCTION")
     classifier_list.append(tf.estimator.Estimator(model_fn=models.my_model_fn,
                                                   model_dir="./model_" + str(k),
+                                                  config=tf.contrib.learn.RunConfig(save_checkpoints_steps=50),
                                                   params=
                                                   {
                                                       "feature_columns": models.feature_columns,
@@ -108,6 +127,11 @@ for k in range(1, Num_Of_Models + 1):
     #tf.logging.info("TRAINING RESULT of MODEL #" + str(k))
     #tf.logging.info("{}".format(train_result))
     tf.logging.info("END of MODEL #" + str(k) + " TRAINING")
+
+# below 3 lines are not work
+#    for trained in train_result:
+#        print("test_PRINT : " + trained["_total_loss"])
+#    print("test_PRINT : " + train_result["training_hooks"])
 
 # Display Weight and Bias
 for k in range(0, Num_Of_Models):

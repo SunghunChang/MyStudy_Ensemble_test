@@ -155,6 +155,8 @@ def my_model_fn(
 
     ################################################# 2. Training mode #################################################
 
+    logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,"_total_loss":total_loss, "_batch_size":batch_size}, every_n_iter=10)
+
     # Default optimizer for DNN Regression : Adam with learning rate=0.001
     # Our objective (train_op) is to minimize loss
     # Provide global step counter (used to count gradient updates)
@@ -168,6 +170,7 @@ def my_model_fn(
             # loss=total_loss,
             loss=average_loss,
             train_op=train_op,
+            training_hooks=[logging_hook],
             predictions=predictions)
 
     # If mode is not PREDICT nor TRAIN, then we must be in EVAL
