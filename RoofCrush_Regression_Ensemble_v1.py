@@ -21,12 +21,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--epoch', type=int, default=500, help='Number of Train Epoch. Default : 500')
 parser.add_argument('--shuffle', type=int, default=256, help='Number of Train shuffle. Default : 256')
 parser.add_argument('--model', type=int, default=2, help='Number of Train Model. Default : 2')
+parser.add_argument('--chkpt', type=int, default=2, help='Save Check Point Every N steps. Default : 1000')
 args = parser.parse_args()
 # print(args.epoch)
 
 Num_Of_Models = args.model
 
 tf.logging.set_verbosity(tf.logging.INFO)
+tf.logging.log_every_n(10, "100_steps_run", 100)
 
 print()
 print()
@@ -85,15 +87,19 @@ validation_metrics = {"accuracy":
 classifier_list = []
 validation_monitor_list = []
 
+#run_config = tf.estimator.RunConfig().replace(session_config=tf.ConfigProto(device_count={'cpu': 0}))
+run_config = tf.estimator.RunConfig(session_config=tf.ConfigProto(device_count={'/GPU':0}), save_checkpoints_steps=args.chkpt)
 for k in range(1, Num_Of_Models + 1):
     tf.logging.info("MODEL #" + str(k) + " CONSTRUCTION")
     classifier_list.append(tf.estimator.Estimator(model_fn=models.my_model_fn,
                                                   model_dir="./model_" + str(k),
-                                                  config=tf.contrib.learn.RunConfig(save_checkpoints_steps=50),
+                                                  #config=tf.contrib.learn.RunConfig(save_checkpoints_steps=100),
+                                                  config=run_config,
                                                   params=
                                                   {
                                                       "feature_columns": models.feature_columns,
-                                                      "model_identifier": str(k)
+                                                      "model_identifier": str(k),
+                                                      "train_logging" : args.chkpt
                                                   }
                                                   )
                            )
@@ -250,5 +256,12 @@ for j in range(len(average_err)):
     average_err_total = average_err_total + average_err[j]
 # total average error
 print("\n{0}\t{1:0.2f}%".format("Total Model Average Error : ", average_err_total / len(average_err)))
+
+print("\n***************************************************")
+print("** Number of Models : " + str(args.model))
+print("** Number of Epoch : " + str(args.epoch))
+print("** Number of Shuffle [for DATA] : " + str(args.shuffle))
+print("** Save Check Point every " + str(args.chkpt) + " steps")
+print("***************************************************\n")
 
 tf.logging.info(" ***** Total End of Job ***** ")

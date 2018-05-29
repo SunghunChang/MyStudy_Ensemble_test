@@ -155,7 +155,10 @@ def my_model_fn(
 
     ################################################# 2. Training mode #################################################
 
-    logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,"_total_loss":total_loss, "_batch_size":batch_size}, every_n_iter=10)
+    logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,
+                                               "_total_loss":total_loss,
+                                               "_batch_size":batch_size},
+                                              every_n_iter=params["train_logging"])
 
     # Default optimizer for DNN Regression : Adam with learning rate=0.001
     # Our objective (train_op) is to minimize loss
