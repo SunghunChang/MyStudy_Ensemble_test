@@ -6,6 +6,7 @@
 
 import tensorflow as tf
 
+
 # Create features
 feature_names = ['vehicle', 'Mp01', 'Mp02', 'Mp03', 'Mp04', 'Mp05', 'Mp06', 'Mp07', 'Mp08', 'Mp09', 'Mp10', 'Mp11', 'Mp12']
 
@@ -16,7 +17,7 @@ for k in range(1,13):
 
 # Create an input function reading a file using the Dataset API
 # Then provide the results to the Estimator API
-def my_input_fn(file_path, repeat_count=1, shuffle_count=1):
+def my_input_fn(file_path, repeat_count=1, shuffle_count=1, batch_size = 32):
     # print(" ***** My Input Function Calling ***** ")
     def decode_csv(line):
         parsed_line = tf.decode_csv(line, [[""], [0.], [0.], [0.], [0.], [0.], [0.], [0.], [0.], [0.], [0.], [0.], [0.], [0.]], field_delim=',')
@@ -33,7 +34,7 @@ def my_input_fn(file_path, repeat_count=1, shuffle_count=1):
             .cache() # Warning: Caches entire dataset, can cause out of memory
             .shuffle(shuffle_count)  # Randomize elems (1 == no operation)
             .repeat(repeat_count)    # Repeats dataset this # times
-            .batch(32)
+            .batch(batch_size) # default 32
             .prefetch(1)  # Make sure you always have 1 batch ready to serve
         )
         iterator = dataset.make_one_shot_iterator()
@@ -73,27 +74,40 @@ def my_model_fn(
         regularizer = tf.keras.regularizers.l2(l=0.01)
         initializer = tf.keras.initializers.glorot_normal(seed=None)
         input_layer = tf.feature_column.input_layer(features, params["feature_columns"])
+        # h1 = tf.layers.dense(input_layer, units=30)
         h1 = tf.layers.Dense(units=30,
-                             activation=tf.nn.relu,
-                             kernel_initializer=initializer,
-                             kernel_regularizer= regularizer,
-                             activity_regularizer=None,
+                             activation=None, #tf.nn.relu,
+                             kernel_initializer = initializer,
+                             kernel_regularizer = regularizer,
+                             activity_regularizer = None,
+                             #bias_regularizer= regularizer,#
+                             #bias_constraint=tf.keras.constraints.MaxNorm(0.1),
                              name="First_Hidden_Layer")(input_layer)
+        h1 = tf.layers.batch_normalization(h1, training=mode == tf.estimator.ModeKeys.TRAIN)
+        h1 = tf.nn.relu(h1)
         h2 = tf.layers.Dense(units=30,
-                             activation=tf.nn.relu,
-                             kernel_initializer=initializer,
-                             kernel_regularizer= regularizer,
-                             activity_regularizer=None,
+                             activation=None, #tf.nn.relu,
+                             kernel_initializer = initializer,
+                             kernel_regularizer = regularizer,
+                             activity_regularizer = None,
+                             #bias_regularizer=regularizer,
+                             #bias_constraint=tf.keras.constraints.MaxNorm(0.1),
                              name="Second_Hidden_Layer")(h1)
+        h2 = tf.layers.batch_normalization(h2, training=mode == tf.estimator.ModeKeys.TRAIN)
+        h2 = tf.nn.relu(h2)
         h3 = tf.layers.Dense(units=30,
-                             activation=tf.nn.relu,
-                             kernel_initializer=initializer,
-                             kernel_regularizer= regularizer,
-                             activity_regularizer=None,
+                             activation=None, #tf.nn.relu,
+                             kernel_initializer = initializer,
+                             kernel_regularizer = regularizer,
+                             activity_regularizer = None,
+                             #bias_regularizer=regularizer,
+                             #bias_constraint=tf.keras.constraints.MaxNorm(0.1),
                              name="Third_Hidden_Layer")(h2)
+        h3 = tf.layers.batch_normalization(h3, training=mode == tf.estimator.ModeKeys.TRAIN)
+        h3 = tf.nn.relu(h3)
         #h3 = tf.layers.Dropout(0.5)(h2)
     #with tf.name_scope('Output_Layer'):
-        output_layer = tf.layers.Dense(units=1, name="Output_Layer")(h3)
+        output_layer = tf.layers.Dense(units = 1, name = "Output_Layer")(h3)
 
     predictions = {'Squeeze': tf.squeeze(output_layer, 1),  # Squeeze is result value
                    'MP01': features['Mp01'],
@@ -154,19 +168,22 @@ def my_model_fn(
         tf.summary.histogram('Third_Layer_Activation', h3)
 
     ################################################# 2. Training mode #################################################
-
     logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,
                                                "_total_loss":total_loss,
                                                "_batch_size":batch_size},
-                                              every_n_iter=params["train_logging"])
+                                               #"output_layer":output_layer},  # It works but too many number.
+                                               #"_predictions":predictions['Squeeze']}, # It works but too many number. ex>32
+                                               every_n_iter=params["train_logging"])
 
     # Default optimizer for DNN Regression : Adam with learning rate=0.001
     # Our objective (train_op) is to minimize loss
     # Provide global step counter (used to count gradient updates)
     if mode == tf.estimator.ModeKeys.TRAIN:
         with tf.name_scope('Training_Stage'):
-            optimizer = tf.train.AdamOptimizer(0.001, name="My_Optimizer")
-            train_op = optimizer.minimize(loss=average_loss, global_step=tf.train.get_global_step())
+            update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+            with tf.control_dependencies(update_ops):
+                #optimizer = tf.train.AdamOptimizer(0.001, name="My_Optimizer")
+                train_op = tf.train.AdamOptimizer(0.001, name="My_Optimizer").minimize(loss=average_loss, global_step=tf.train.get_global_step())
         # Return training operations: loss and train_op
         return tf.estimator.EstimatorSpec(
             mode,
@@ -185,6 +202,7 @@ def my_model_fn(
         rmse = tf.metrics.root_mean_squared_error(labels, predictions['Squeeze'])
         # accuracy = tf.metrics.accuracy(labels, predictions['Squeeze'])
         accuracy = tf.metrics.recall(labels, predictions['Squeeze'])
+
         # Add the rmse to the collection of evaluation metrics.
         eval_metrics = {"rmse": rmse, "accuracy": accuracy}
 

@@ -3,8 +3,14 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.colors import LogNorm
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+import time
 
-def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1, bias_layer_2, bias_layer_3, k):
+day = time.localtime()
+day_string = "%04d-%02d-%02d_%02d-%02d-%02d" % (day.tm_year, day.tm_mon, day.tm_mday, day.tm_hour, day.tm_min, day.tm_sec)
+
+def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1, bias_layer_2, bias_layer_3, k, plot_show):
+	#plt.figure(figsize=(8.0, 5.0))
+
 	fig, ((ax1, ax2, ax3), (ax4, ax5, ax6)) = plt.subplots(2, 3)
 
 	ax1.set_title('1st Layer Weight [Model #{0:s}]'.format(str(k + 1)))
@@ -62,5 +68,16 @@ def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1,
 	ax6.legend(loc="best")
 	ax6.grid(linestyle=':', linewidth=1)
 
-	#    fig.tight_layout()
-	plt.show()
+	#fig.tight_layout()
+
+#   # Maximize Figure Window
+#	manager = plt.get_current_fig_manager()
+#	manager.resize(*manager.window.maxsize())
+	figure = plt.gcf()
+	figure.set_size_inches(24, 16)
+
+	plt.savefig("./01_Run_Weight_n_Bias/Model_{0:2d}_{1}".format(int(k+1),day_string), # figsize=(24, 16),
+	            dpi=150, facecolor='w', edgecolor='b', orientation='portrait', papertype=None, format=None,
+	            transparent=True, bbox_inches='tight', pad_inches=0.1, frameon=None)
+	if plot_show:
+		plt.show()
