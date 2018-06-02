@@ -1,0 +1,914 @@
+info - 2018-06-02 19:46:38,991 - TensorFlow version: 1.7.0
+info - 2018-06-02 19:46:38,994 - Before classifier construction
+warning - 2018-06-02 19:46:51,531 - From C:\Python35\lib\site-packages\tensorflow\contrib\learn\python\learn\datasets\base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+warning - 2018-06-02 19:46:54,539 - From C:/Users/Administrator/Desktop/TensorFlow_csh/MyStudy_Ensemble_test/RoofCrush_Regression_Ensemble_v1.py:138: MetricSpec.__init__ (from tensorflow.contrib.learn.python.learn.metric_spec) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.estimator.EstimatorSpec.eval_metric_ops.
+info - 2018-06-02 19:46:54,547 - MODEL #1 CONSTRUCTION
+info - 2018-06-02 19:46:54,549 - Using config: {'_task_type': 'worker', '_global_id_in_cluster': 0, '_num_ps_replicas': 0, '_master': '', '_task_id': 0, '_save_checkpoints_secs': None, '_save_summary_steps': 1, '_service': None, '_save_checkpoints_steps': 1000, '_num_worker_replicas': 1, '_tf_random_seed': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001ADBBBDCBA8>, '_model_dir': './model_1', '_is_chief': True, '_keep_checkpoint_max': 10, '_log_step_count_steps': 100, '_evaluation_master': '', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_keep_checkpoint_every_n_hours': 10000}
+info - 2018-06-02 19:46:54,553 - MODEL #2 CONSTRUCTION
+info - 2018-06-02 19:46:54,555 - Using config: {'_task_type': 'worker', '_global_id_in_cluster': 0, '_num_ps_replicas': 0, '_master': '', '_task_id': 0, '_save_checkpoints_secs': None, '_save_summary_steps': 1, '_service': None, '_save_checkpoints_steps': 1000, '_num_worker_replicas': 1, '_tf_random_seed': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001ADBBBDCCF8>, '_model_dir': './model_2', '_is_chief': True, '_keep_checkpoint_max': 10, '_log_step_count_steps': 100, '_evaluation_master': '', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_keep_checkpoint_every_n_hours': 10000}
+info - 2018-06-02 19:46:54,559 - MODEL #3 CONSTRUCTION
+info - 2018-06-02 19:46:54,561 - Using config: {'_task_type': 'worker', '_global_id_in_cluster': 0, '_num_ps_replicas': 0, '_master': '', '_task_id': 0, '_save_checkpoints_secs': None, '_save_summary_steps': 1, '_service': None, '_save_checkpoints_steps': 1000, '_num_worker_replicas': 1, '_tf_random_seed': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001ADBBBDCE48>, '_model_dir': './model_3', '_is_chief': True, '_keep_checkpoint_max': 10, '_log_step_count_steps': 100, '_evaluation_master': '', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_keep_checkpoint_every_n_hours': 10000}
+info - 2018-06-02 19:46:54,563 - MODEL #4 CONSTRUCTION
+info - 2018-06-02 19:46:54,565 - Using config: {'_task_type': 'worker', '_global_id_in_cluster': 0, '_num_ps_replicas': 0, '_master': '', '_task_id': 0, '_save_checkpoints_secs': None, '_save_summary_steps': 1, '_service': None, '_save_checkpoints_steps': 1000, '_num_worker_replicas': 1, '_tf_random_seed': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001ADBBBDCF98>, '_model_dir': './model_4', '_is_chief': True, '_keep_checkpoint_max': 10, '_log_step_count_steps': 100, '_evaluation_master': '', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_keep_checkpoint_every_n_hours': 10000}
+info - 2018-06-02 19:46:54,568 - ...done constructing classifier
+info - 2018-06-02 19:46:54,569 - Train MODEL #1
+info - 2018-06-02 19:46:54,900 - Calling model_fn.
+info - 2018-06-02 19:46:58,600 - Done calling model_fn.
+info - 2018-06-02 19:46:58,604 - Create CheckpointSaverHook.
+info - 2018-06-02 19:47:00,908 - Graph was finalized.
+info - 2018-06-02 19:47:01,844 - Running local_init_op.
+info - 2018-06-02 19:47:01,922 - Done running local_init_op.
+info - 2018-06-02 19:47:08,847 - Saving checkpoints for 1 into ./model_1\model.ckpt.
+info - 2018-06-02 19:47:10,344 - loss = 9.323639, step = 1
+info - 2018-06-02 19:47:10,379 - _average_loss = 9.323639, _batch_size = 32, _total_loss = 298.35645
+info - 2018-06-02 19:47:13,826 - Saving checkpoints for 12 into ./model_1\model.ckpt.
+info - 2018-06-02 19:47:15,401 - Loss for final step: 8.433991.
+info - 2018-06-02 19:47:15,404 - END of MODEL #1 TRAINING
+info - 2018-06-02 19:47:15,404 - Train MODEL #2
+info - 2018-06-02 19:47:15,920 - Calling model_fn.
+info - 2018-06-02 19:47:21,682 - Done calling model_fn.
+info - 2018-06-02 19:47:21,691 - Create CheckpointSaverHook.
+info - 2018-06-02 19:47:24,389 - Graph was finalized.
+info - 2018-06-02 19:47:25,408 - Running local_init_op.
+info - 2018-06-02 19:47:25,472 - Done running local_init_op.
+info - 2018-06-02 19:47:33,622 - Saving checkpoints for 1 into ./model_2\model.ckpt.
+info - 2018-06-02 19:47:34,442 - loss = 11.735374, step = 1
+info - 2018-06-02 19:47:34,444 - _average_loss = 11.735374, _batch_size = 32, _total_loss = 375.53198
+info - 2018-06-02 19:47:37,062 - Saving checkpoints for 12 into ./model_2\model.ckpt.
+info - 2018-06-02 19:47:38,217 - Loss for final step: 7.4206653.
+info - 2018-06-02 19:47:38,218 - END of MODEL #2 TRAINING
+info - 2018-06-02 19:47:38,219 - Train MODEL #3
+info - 2018-06-02 19:47:38,539 - Calling model_fn.
+info - 2018-06-02 19:47:43,886 - Done calling model_fn.
+info - 2018-06-02 19:47:43,926 - Create CheckpointSaverHook.
+info - 2018-06-02 19:47:46,265 - Graph was finalized.
+info - 2018-06-02 19:47:46,969 - Running local_init_op.
+info - 2018-06-02 19:47:47,025 - Done running local_init_op.
+info - 2018-06-02 19:47:53,336 - Saving checkpoints for 1 into ./model_3\model.ckpt.
+info - 2018-06-02 19:47:54,189 - loss = 14.730265, step = 1
+info - 2018-06-02 19:47:54,191 - _average_loss = 14.730265, _batch_size = 32, _total_loss = 471.36847
+info - 2018-06-02 19:47:56,601 - Saving checkpoints for 12 into ./model_3\model.ckpt.
+info - 2018-06-02 19:47:57,947 - Loss for final step: 13.402959.
+info - 2018-06-02 19:47:57,948 - END of MODEL #3 TRAINING
+info - 2018-06-02 19:47:57,949 - Train MODEL #4
+info - 2018-06-02 19:47:58,229 - Calling model_fn.
+info - 2018-06-02 19:48:03,597 - Done calling model_fn.
+info - 2018-06-02 19:48:03,602 - Create CheckpointSaverHook.
+info - 2018-06-02 19:48:05,851 - Graph was finalized.
+info - 2018-06-02 19:48:06,604 - Running local_init_op.
+info - 2018-06-02 19:48:06,650 - Done running local_init_op.
+info - 2018-06-02 19:48:12,978 - Saving checkpoints for 1 into ./model_4\model.ckpt.
+info - 2018-06-02 19:48:13,809 - loss = 7.610094, step = 1
+info - 2018-06-02 19:48:13,812 - _average_loss = 7.610094, _batch_size = 32, _total_loss = 243.52301
+info - 2018-06-02 19:48:15,825 - Saving checkpoints for 12 into ./model_4\model.ckpt.
+info - 2018-06-02 19:48:18,370 - Loss for final step: 7.6865697.
+info - 2018-06-02 19:48:18,371 - END of MODEL #4 TRAINING
+info - 2018-06-02 19:49:37,238 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:49:37,240 -  ***** Evaluation results *****
+info - 2018-06-02 19:49:37,241 -  *****      #1 MODEL      *****
+info - 2018-06-02 19:49:37,678 - Calling model_fn.
+info - 2018-06-02 19:49:39,962 - Done calling model_fn.
+info - 2018-06-02 19:49:40,070 - Starting evaluation at 2018-06-02-10:49:40
+info - 2018-06-02 19:49:40,571 - Graph was finalized.
+info - 2018-06-02 19:49:40,572 - Restoring parameters from ./model_1\model.ckpt-12
+info - 2018-06-02 19:49:40,866 - Running local_init_op.
+info - 2018-06-02 19:49:40,930 - Done running local_init_op.
+info - 2018-06-02 19:49:41,469 - Finished evaluation at 2018-06-02-10:49:41
+info - 2018-06-02 19:49:41,471 - Saving dict for global step 12: accuracy = 1.0, global_step = 12, loss = 7.855031, rmse = 2.8026829
+info - 2018-06-02 19:49:42,106 -    loss ---> 7.8550310134887695
+info - 2018-06-02 19:49:42,107 -    accuracy ---> 1.0
+info - 2018-06-02 19:49:42,107 -    rmse ---> 2.802682876586914
+info - 2018-06-02 19:49:42,108 -    global_step ---> 12
+info - 2018-06-02 19:49:42,109 -  ******************************
+info - 2018-06-02 19:49:42,109 -  ******************************
+info - 2018-06-02 19:49:42,110 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:49:42,111 -  ***** Evaluation results *****
+info - 2018-06-02 19:49:42,111 -  *****      #2 MODEL      *****
+info - 2018-06-02 19:49:42,338 - Calling model_fn.
+info - 2018-06-02 19:49:44,184 - Done calling model_fn.
+info - 2018-06-02 19:49:44,293 - Starting evaluation at 2018-06-02-10:49:44
+info - 2018-06-02 19:49:44,752 - Graph was finalized.
+info - 2018-06-02 19:49:44,753 - Restoring parameters from ./model_2\model.ckpt-12
+info - 2018-06-02 19:49:45,070 - Running local_init_op.
+info - 2018-06-02 19:49:45,126 - Done running local_init_op.
+info - 2018-06-02 19:49:45,611 - Finished evaluation at 2018-06-02-10:49:45
+info - 2018-06-02 19:49:45,612 - Saving dict for global step 12: accuracy = 1.0, global_step = 12, loss = 8.375514, rmse = 2.894048
+info - 2018-06-02 19:49:46,273 -    loss ---> 8.375514030456543
+info - 2018-06-02 19:49:46,274 -    accuracy ---> 1.0
+info - 2018-06-02 19:49:46,274 -    rmse ---> 2.894047975540161
+info - 2018-06-02 19:49:46,275 -    global_step ---> 12
+info - 2018-06-02 19:49:46,276 -  ******************************
+info - 2018-06-02 19:49:46,276 -  ******************************
+info - 2018-06-02 19:49:46,277 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:49:46,277 -  ***** Evaluation results *****
+info - 2018-06-02 19:49:46,278 -  *****      #3 MODEL      *****
+info - 2018-06-02 19:49:46,469 - Calling model_fn.
+info - 2018-06-02 19:49:48,077 - Done calling model_fn.
+info - 2018-06-02 19:49:48,184 - Starting evaluation at 2018-06-02-10:49:48
+info - 2018-06-02 19:49:48,603 - Graph was finalized.
+info - 2018-06-02 19:49:48,605 - Restoring parameters from ./model_3\model.ckpt-12
+info - 2018-06-02 19:49:48,918 - Running local_init_op.
+info - 2018-06-02 19:49:49,006 - Done running local_init_op.
+info - 2018-06-02 19:49:49,587 - Finished evaluation at 2018-06-02-10:49:49
+info - 2018-06-02 19:49:49,588 - Saving dict for global step 12: accuracy = 1.0, global_step = 12, loss = 19.775002, rmse = 4.4469094
+info - 2018-06-02 19:49:50,805 -    loss ---> 19.775001525878906
+info - 2018-06-02 19:49:50,806 -    accuracy ---> 1.0
+info - 2018-06-02 19:49:50,807 -    rmse ---> 4.446909427642822
+info - 2018-06-02 19:49:50,808 -    global_step ---> 12
+info - 2018-06-02 19:49:50,808 -  ******************************
+info - 2018-06-02 19:49:50,809 -  ******************************
+info - 2018-06-02 19:49:50,810 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:49:50,811 -  ***** Evaluation results *****
+info - 2018-06-02 19:49:50,811 -  *****      #4 MODEL      *****
+info - 2018-06-02 19:49:51,672 - Calling model_fn.
+info - 2018-06-02 19:49:58,148 - Done calling model_fn.
+info - 2018-06-02 19:49:58,262 - Starting evaluation at 2018-06-02-10:49:58
+info - 2018-06-02 19:49:58,848 - Graph was finalized.
+info - 2018-06-02 19:49:58,850 - Restoring parameters from ./model_4\model.ckpt-12
+info - 2018-06-02 19:49:59,179 - Running local_init_op.
+info - 2018-06-02 19:49:59,235 - Done running local_init_op.
+info - 2018-06-02 19:49:59,851 - Finished evaluation at 2018-06-02-10:49:59
+info - 2018-06-02 19:49:59,853 - Saving dict for global step 12: accuracy = 1.0, global_step = 12, loss = 5.6419315, rmse = 2.3752751
+info - 2018-06-02 19:50:00,969 -    loss ---> 5.641931533813477
+info - 2018-06-02 19:50:00,970 -    accuracy ---> 1.0
+info - 2018-06-02 19:50:00,971 -    rmse ---> 2.375275135040283
+info - 2018-06-02 19:50:00,972 -    global_step ---> 12
+info - 2018-06-02 19:50:00,973 -  ******************************
+info - 2018-06-02 19:50:00,974 -  ******************************
+info - 2018-06-02 19:50:00,976 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:50:00,976 -  *****        1st MODEL        ***** 
+info - 2018-06-02 19:50:01,221 - Calling model_fn.
+info - 2018-06-02 19:50:02,651 - Done calling model_fn.
+info - 2018-06-02 19:50:03,185 - Graph was finalized.
+info - 2018-06-02 19:50:03,186 - Restoring parameters from ./model_1\model.ckpt-12
+info - 2018-06-02 19:50:03,443 - Running local_init_op.
+info - 2018-06-02 19:50:03,476 - Done running local_init_op.
+info - 2018-06-02 19:50:03,767 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:50:03,767 -  *****        2st MODEL        ***** 
+info - 2018-06-02 19:50:04,035 - Calling model_fn.
+info - 2018-06-02 19:50:05,332 - Done calling model_fn.
+info - 2018-06-02 19:50:05,944 - Graph was finalized.
+info - 2018-06-02 19:50:05,946 - Restoring parameters from ./model_2\model.ckpt-12
+info - 2018-06-02 19:50:06,269 - Running local_init_op.
+info - 2018-06-02 19:50:06,303 - Done running local_init_op.
+info - 2018-06-02 19:50:06,662 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:50:06,663 -  *****        3st MODEL        ***** 
+info - 2018-06-02 19:50:07,050 - Calling model_fn.
+info - 2018-06-02 19:50:08,413 - Done calling model_fn.
+info - 2018-06-02 19:50:08,905 - Graph was finalized.
+info - 2018-06-02 19:50:08,906 - Restoring parameters from ./model_3\model.ckpt-12
+info - 2018-06-02 19:50:09,162 - Running local_init_op.
+info - 2018-06-02 19:50:09,196 - Done running local_init_op.
+info - 2018-06-02 19:50:09,607 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:50:09,608 -  *****        4st MODEL        ***** 
+info - 2018-06-02 19:50:09,933 - Calling model_fn.
+info - 2018-06-02 19:50:11,183 - Done calling model_fn.
+info - 2018-06-02 19:50:11,627 - Graph was finalized.
+info - 2018-06-02 19:50:11,629 - Restoring parameters from ./model_4\model.ckpt-12
+info - 2018-06-02 19:50:11,933 - Running local_init_op.
+info - 2018-06-02 19:50:11,966 - Done running local_init_op.
+info - 2018-06-02 19:50:12,267 -  ***** Memory Base Predictions ***** 
+info - 2018-06-02 19:50:12,380 - Calling model_fn.
+info - 2018-06-02 19:50:13,503 - Done calling model_fn.
+info - 2018-06-02 19:50:13,984 - Graph was finalized.
+info - 2018-06-02 19:50:13,985 - Restoring parameters from ./model_1\model.ckpt-12
+info - 2018-06-02 19:50:14,204 - Running local_init_op.
+info - 2018-06-02 19:50:14,226 - Done running local_init_op.
+info - 2018-06-02 19:50:14,656 - Calling model_fn.
+info - 2018-06-02 19:50:15,777 - Done calling model_fn.
+info - 2018-06-02 19:50:16,266 - Graph was finalized.
+info - 2018-06-02 19:50:16,267 - Restoring parameters from ./model_2\model.ckpt-12
+info - 2018-06-02 19:50:16,467 - Running local_init_op.
+info - 2018-06-02 19:50:16,490 - Done running local_init_op.
+info - 2018-06-02 19:50:16,975 - Calling model_fn.
+info - 2018-06-02 19:50:18,881 - Done calling model_fn.
+info - 2018-06-02 19:50:19,327 - Graph was finalized.
+info - 2018-06-02 19:50:19,328 - Restoring parameters from ./model_3\model.ckpt-12
+info - 2018-06-02 19:50:19,566 - Running local_init_op.
+info - 2018-06-02 19:50:19,587 - Done running local_init_op.
+info - 2018-06-02 19:50:20,039 - Calling model_fn.
+info - 2018-06-02 19:50:21,186 - Done calling model_fn.
+info - 2018-06-02 19:50:21,628 - Graph was finalized.
+info - 2018-06-02 19:50:21,630 - Restoring parameters from ./model_4\model.ckpt-12
+info - 2018-06-02 19:50:21,835 - Running local_init_op.
+info - 2018-06-02 19:50:21,861 - Done running local_init_op.
+info - 2018-06-02 19:50:22,218 -  ***** Total End of Job ***** 
+info - 2018-06-02 19:51:22,860 - TensorFlow version: 1.7.0
+info - 2018-06-02 19:51:22,862 - Before classifier construction
+warning - 2018-06-02 19:51:35,122 - From C:\Python35\lib\site-packages\tensorflow\contrib\learn\python\learn\datasets\base.py:198: retry (from tensorflow.contrib.learn.python.learn.datasets.base) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use the retry module or similar alternatives.
+warning - 2018-06-02 19:51:38,039 - From C:/Users/Administrator/Desktop/TensorFlow_csh/MyStudy_Ensemble_test/RoofCrush_Regression_Ensemble_v1.py:138: MetricSpec.__init__ (from tensorflow.contrib.learn.python.learn.metric_spec) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.estimator.EstimatorSpec.eval_metric_ops.
+info - 2018-06-02 19:51:38,042 - MODEL #1 CONSTRUCTION
+info - 2018-06-02 19:51:38,044 - Using config: {'_log_step_count_steps': 100, '_keep_checkpoint_every_n_hours': 10000, '_save_summary_steps': 1, '_service': None, '_master': '', '_save_checkpoints_steps': 1000, '_save_checkpoints_secs': None, '_keep_checkpoint_max': 10, '_task_type': 'worker', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_tf_random_seed': None, '_evaluation_master': '', '_num_worker_replicas': 1, '_num_ps_replicas': 0, '_global_id_in_cluster': 0, '_is_chief': True, '_task_id': 0, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001F7AC511D68>, '_model_dir': './model_1'}
+info - 2018-06-02 19:51:38,048 - MODEL #2 CONSTRUCTION
+info - 2018-06-02 19:51:38,050 - Using config: {'_log_step_count_steps': 100, '_keep_checkpoint_every_n_hours': 10000, '_save_summary_steps': 1, '_service': None, '_master': '', '_save_checkpoints_steps': 1000, '_save_checkpoints_secs': None, '_keep_checkpoint_max': 10, '_task_type': 'worker', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_tf_random_seed': None, '_evaluation_master': '', '_num_worker_replicas': 1, '_num_ps_replicas': 0, '_global_id_in_cluster': 0, '_is_chief': True, '_task_id': 0, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001F7AC511EB8>, '_model_dir': './model_2'}
+info - 2018-06-02 19:51:38,053 - MODEL #3 CONSTRUCTION
+info - 2018-06-02 19:51:38,054 - Using config: {'_log_step_count_steps': 100, '_keep_checkpoint_every_n_hours': 10000, '_save_summary_steps': 1, '_service': None, '_master': '', '_save_checkpoints_steps': 1000, '_save_checkpoints_secs': None, '_keep_checkpoint_max': 10, '_task_type': 'worker', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_tf_random_seed': None, '_evaluation_master': '', '_num_worker_replicas': 1, '_num_ps_replicas': 0, '_global_id_in_cluster': 0, '_is_chief': True, '_task_id': 0, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001F7AC529048>, '_model_dir': './model_3'}
+info - 2018-06-02 19:51:38,059 - MODEL #4 CONSTRUCTION
+info - 2018-06-02 19:51:38,061 - Using config: {'_log_step_count_steps': 100, '_keep_checkpoint_every_n_hours': 10000, '_save_summary_steps': 1, '_service': None, '_master': '', '_save_checkpoints_steps': 1000, '_save_checkpoints_secs': None, '_keep_checkpoint_max': 10, '_task_type': 'worker', '_session_config': device_count {
+  key: "/GPU"
+}
+, '_tf_random_seed': None, '_evaluation_master': '', '_num_worker_replicas': 1, '_num_ps_replicas': 0, '_global_id_in_cluster': 0, '_is_chief': True, '_task_id': 0, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x000001F7AC529198>, '_model_dir': './model_4'}
+info - 2018-06-02 19:51:38,064 - ...done constructing classifier
+info - 2018-06-02 19:51:38,065 - Train MODEL #1
+info - 2018-06-02 19:51:38,310 - Calling model_fn.
+info - 2018-06-02 19:51:42,048 - Done calling model_fn.
+info - 2018-06-02 19:51:42,054 - Create CheckpointSaverHook.
+info - 2018-06-02 19:51:44,025 - Graph was finalized.
+info - 2018-06-02 19:51:44,042 - Restoring parameters from ./model_1\model.ckpt-12
+info - 2018-06-02 19:51:44,613 - Running local_init_op.
+info - 2018-06-02 19:51:44,662 - Done running local_init_op.
+info - 2018-06-02 19:51:52,183 - Saving checkpoints for 13 into ./model_1\model.ckpt.
+info - 2018-06-02 19:51:53,052 - loss = 8.289937, step = 13
+info - 2018-06-02 19:51:53,055 - _batch_size = 32, _average_loss = 8.289937, _total_loss = 265.27798
+info - 2018-06-02 19:51:58,548 - global_step/sec: 18.1895
+info - 2018-06-02 19:51:58,552 - loss = 1.7222798, step = 113 (5.500 sec)
+info - 2018-06-02 19:51:59,660 - global_step/sec: 89.9496
+info - 2018-06-02 19:51:59,664 - loss = 0.06450692, step = 213 (1.112 sec)
+info - 2018-06-02 19:52:00,821 - global_step/sec: 86.0011
+info - 2018-06-02 19:52:00,825 - loss = 0.4655734, step = 313 (1.162 sec)
+info - 2018-06-02 19:52:01,823 - global_step/sec: 99.8334
+info - 2018-06-02 19:52:01,827 - loss = 0.06695272, step = 413 (1.002 sec)
+info - 2018-06-02 19:52:02,818 - global_step/sec: 100.535
+info - 2018-06-02 19:52:02,822 - loss = 0.08215169, step = 513 (0.994 sec)
+info - 2018-06-02 19:52:03,815 - global_step/sec: 100.235
+info - 2018-06-02 19:52:03,820 - loss = 0.050341725, step = 613 (1.000 sec)
+info - 2018-06-02 19:52:04,800 - global_step/sec: 101.661
+info - 2018-06-02 19:52:04,804 - loss = 0.08576325, step = 713 (0.984 sec)
+info - 2018-06-02 19:52:05,791 - global_step/sec: 100.943
+info - 2018-06-02 19:52:05,795 - loss = 0.06952051, step = 813 (0.991 sec)
+info - 2018-06-02 19:52:06,860 - global_step/sec: 93.3964
+info - 2018-06-02 19:52:06,865 - loss = 0.038794488, step = 913 (1.071 sec)
+info - 2018-06-02 19:52:07,910 - Saving checkpoints for 1013 into ./model_1\model.ckpt.
+info - 2018-06-02 19:52:08,819 - global_step/sec: 51.0905
+info - 2018-06-02 19:52:08,822 - loss = 0.028723225, step = 1013 (1.956 sec)
+info - 2018-06-02 19:52:08,824 - _batch_size = 32, _average_loss = 0.028723225, _total_loss = 0.9191432 (15.769 sec)
+info - 2018-06-02 19:52:09,988 - global_step/sec: 85.5598
+info - 2018-06-02 19:52:09,993 - loss = 0.02988585, step = 1113 (1.170 sec)
+info - 2018-06-02 19:52:11,220 - global_step/sec: 81.1142
+info - 2018-06-02 19:52:11,224 - loss = 0.02568604, step = 1213 (1.233 sec)
+info - 2018-06-02 19:52:12,517 - global_step/sec: 77.0501
+info - 2018-06-02 19:52:12,522 - loss = 0.04615126, step = 1313 (1.298 sec)
+info - 2018-06-02 19:52:14,115 - global_step/sec: 62.5754
+info - 2018-06-02 19:52:14,119 - loss = 0.023411471, step = 1413 (1.597 sec)
+info - 2018-06-02 19:52:15,165 - global_step/sec: 95.2659
+info - 2018-06-02 19:52:15,170 - loss = 0.040057436, step = 1513 (1.050 sec)
+info - 2018-06-02 19:52:16,487 - global_step/sec: 75.6497
+info - 2018-06-02 19:52:16,492 - loss = 0.053329527, step = 1613 (1.323 sec)
+info - 2018-06-02 19:52:17,570 - global_step/sec: 92.4453
+info - 2018-06-02 19:52:17,575 - loss = 0.020245817, step = 1713 (1.082 sec)
+info - 2018-06-02 19:52:18,874 - global_step/sec: 76.636
+info - 2018-06-02 19:52:18,880 - loss = 0.03160558, step = 1813 (1.307 sec)
+info - 2018-06-02 19:52:19,993 - global_step/sec: 89.3059
+info - 2018-06-02 19:52:19,998 - loss = 0.042622186, step = 1913 (1.117 sec)
+info - 2018-06-02 19:52:21,243 - Saving checkpoints for 2013 into ./model_1\model.ckpt.
+info - 2018-06-02 19:52:22,416 - global_step/sec: 41.2947
+info - 2018-06-02 19:52:22,420 - loss = 0.016741876, step = 2013 (2.423 sec)
+info - 2018-06-02 19:52:22,422 - _batch_size = 32, _average_loss = 0.016741876, _total_loss = 0.53574 (13.598 sec)
+info - 2018-06-02 19:52:23,974 - global_step/sec: 64.1833
+info - 2018-06-02 19:52:23,978 - loss = 0.05357851, step = 2113 (1.558 sec)
+info - 2018-06-02 19:52:25,437 - global_step/sec: 68.3538
+info - 2018-06-02 19:52:25,441 - loss = 0.036632948, step = 2213 (1.463 sec)
+info - 2018-06-02 19:52:27,275 - global_step/sec: 54.4003
+info - 2018-06-02 19:52:27,283 - loss = 0.011354759, step = 2313 (1.842 sec)
+info - 2018-06-02 19:52:28,761 - global_step/sec: 67.2498
+info - 2018-06-02 19:52:28,766 - loss = 0.02810514, step = 2413 (1.482 sec)
+info - 2018-06-02 19:52:29,924 - global_step/sec: 86.0006
+info - 2018-06-02 19:52:29,929 - loss = 0.027978228, step = 2513 (1.164 sec)
+info - 2018-06-02 19:52:30,965 - global_step/sec: 96.0902
+info - 2018-06-02 19:52:30,969 - loss = 0.03929986, step = 2613 (1.040 sec)
+info - 2018-06-02 19:52:31,933 - global_step/sec: 103.344
+info - 2018-06-02 19:52:31,937 - loss = 0.018201422, step = 2713 (0.969 sec)
+info - 2018-06-02 19:52:32,988 - global_step/sec: 94.8134
+info - 2018-06-02 19:52:32,996 - loss = 0.035582192, step = 2813 (1.059 sec)
+info - 2018-06-02 19:52:34,083 - global_step/sec: 91.3467
+info - 2018-06-02 19:52:34,087 - loss = 0.029197305, step = 2913 (1.091 sec)
+info - 2018-06-02 19:52:35,222 - Saving checkpoints for 3013 into ./model_1\model.ckpt.
+info - 2018-06-02 19:52:36,285 - global_step/sec: 45.4036
+info - 2018-06-02 19:52:36,289 - loss = 0.09408222, step = 3013 (2.202 sec)
+info - 2018-06-02 19:52:36,292 - _batch_size = 32, _average_loss = 0.09408222, _total_loss = 3.010631 (13.870 sec)
+info - 2018-06-02 19:52:37,808 - global_step/sec: 65.6161
+info - 2018-06-02 19:52:37,822 - loss = 0.02040841, step = 3113 (1.532 sec)
+info - 2018-06-02 19:52:39,183 - global_step/sec: 72.7317
+info - 2018-06-02 19:52:39,188 - loss = 0.016723115, step = 3213 (1.367 sec)
+info - 2018-06-02 19:52:40,900 - global_step/sec: 58.2702
+info - 2018-06-02 19:52:40,905 - loss = 0.021705886, step = 3313 (1.716 sec)
+info - 2018-06-02 19:52:42,142 - global_step/sec: 80.4616
+info - 2018-06-02 19:52:42,146 - loss = 0.014124431, step = 3413 (1.242 sec)
+info - 2018-06-02 19:52:43,336 - global_step/sec: 83.7663
+info - 2018-06-02 19:52:43,341 - loss = 0.016594201, step = 3513 (1.195 sec)
+info - 2018-06-02 19:52:44,651 - global_step/sec: 76.0529
+info - 2018-06-02 19:52:44,656 - loss = 0.024307285, step = 3613 (1.314 sec)
+info - 2018-06-02 19:52:45,696 - global_step/sec: 95.6299
+info - 2018-06-02 19:52:45,701 - loss = 0.024333213, step = 3713 (1.047 sec)
+info - 2018-06-02 19:52:46,754 - global_step/sec: 94.6337
+info - 2018-06-02 19:52:46,758 - loss = 0.020423338, step = 3813 (1.057 sec)
+info - 2018-06-02 19:52:47,851 - global_step/sec: 91.1798
+info - 2018-06-02 19:52:47,856 - loss = 0.023613852, step = 3913 (1.097 sec)
+info - 2018-06-02 19:52:48,868 - Saving checkpoints for 4013 into ./model_1\model.ckpt.
+info - 2018-06-02 19:52:49,687 - global_step/sec: 54.4299
+info - 2018-06-02 19:52:49,691 - loss = 0.013644931, step = 4013 (1.836 sec)
+info - 2018-06-02 19:52:49,693 - _batch_size = 32, _average_loss = 0.013644931, _total_loss = 0.4366378 (13.401 sec)
+info - 2018-06-02 19:52:50,858 - global_step/sec: 85.4865
+info - 2018-06-02 19:52:50,862 - loss = 0.007858096, step = 4113 (1.171 sec)
+info - 2018-06-02 19:52:52,119 - global_step/sec: 79.3121
+info - 2018-06-02 19:52:52,124 - loss = 0.011965638, step = 4213 (1.261 sec)
+info - 2018-06-02 19:52:53,268 - global_step/sec: 86.8986
+info - 2018-06-02 19:52:53,273 - loss = 0.007920337, step = 4313 (1.151 sec)
+info - 2018-06-02 19:52:55,164 - global_step/sec: 52.7631
+info - 2018-06-02 19:52:55,170 - loss = 0.015566046, step = 4413 (1.896 sec)
+info - 2018-06-02 19:52:56,409 - global_step/sec: 80.3969
+info - 2018-06-02 19:52:56,414 - loss = 0.014371135, step = 4513 (1.243 sec)
+info - 2018-06-02 19:52:57,642 - global_step/sec: 81.0489
+info - 2018-06-02 19:52:57,647 - loss = 0.012635546, step = 4613 (1.235 sec)
+info - 2018-06-02 19:52:58,751 - global_step/sec: 90.1927
+info - 2018-06-02 19:52:58,755 - loss = 0.012222564, step = 4713 (1.108 sec)
+info - 2018-06-02 19:52:59,801 - global_step/sec: 95.2645
+info - 2018-06-02 19:52:59,804 - loss = 0.01889833, step = 4813 (1.049 sec)
+info - 2018-06-02 19:53:00,873 - global_step/sec: 93.2213
+info - 2018-06-02 19:53:00,877 - loss = 0.012910724, step = 4913 (1.074 sec)
+info - 2018-06-02 19:53:01,892 - Saving checkpoints for 5013 into ./model_1\model.ckpt.
+info - 2018-06-02 19:53:02,665 - global_step/sec: 55.7976
+info - 2018-06-02 19:53:02,670 - loss = 0.0084969215, step = 5013 (1.792 sec)
+info - 2018-06-02 19:53:02,672 - _batch_size = 32, _average_loss = 0.0084969215, _total_loss = 0.2719015 (12.979 sec)
+info - 2018-06-02 19:53:03,998 - global_step/sec: 75.0817
+info - 2018-06-02 19:53:04,003 - loss = 0.012823637, step = 5113 (1.332 sec)
+info - 2018-06-02 19:53:05,257 - global_step/sec: 79.3751
+info - 2018-06-02 19:53:05,262 - loss = 0.008054536, step = 5213 (1.260 sec)
+info - 2018-06-02 19:53:06,479 - global_step/sec: 81.8456
+info - 2018-06-02 19:53:06,484 - loss = 0.009558167, step = 5313 (1.223 sec)
+info - 2018-06-02 19:53:08,153 - global_step/sec: 59.6973
+info - 2018-06-02 19:53:08,158 - loss = 0.019169034, step = 5413 (1.673 sec)
+info - 2018-06-02 19:53:09,363 - global_step/sec: 82.6579
+info - 2018-06-02 19:53:09,367 - loss = 0.0136173135, step = 5513 (1.210 sec)
+info - 2018-06-02 19:53:10,472 - global_step/sec: 90.1925
+info - 2018-06-02 19:53:10,477 - loss = 0.01937616, step = 5613 (1.110 sec)
+info - 2018-06-02 19:53:10,577 - Saving checkpoints for 5622 into ./model_1\model.ckpt.
+info - 2018-06-02 19:53:11,424 - Loss for final step: 0.04208344.
+info - 2018-06-02 19:53:11,426 - END of MODEL #1 TRAINING
+info - 2018-06-02 19:53:11,427 - Train MODEL #2
+info - 2018-06-02 19:53:11,675 - Calling model_fn.
+info - 2018-06-02 19:53:16,882 - Done calling model_fn.
+info - 2018-06-02 19:53:16,887 - Create CheckpointSaverHook.
+info - 2018-06-02 19:53:18,866 - Graph was finalized.
+info - 2018-06-02 19:53:18,871 - Restoring parameters from ./model_2\model.ckpt-12
+info - 2018-06-02 19:53:19,489 - Running local_init_op.
+info - 2018-06-02 19:53:19,544 - Done running local_init_op.
+info - 2018-06-02 19:53:25,953 - Saving checkpoints for 13 into ./model_2\model.ckpt.
+info - 2018-06-02 19:53:26,810 - loss = 8.587728, step = 13
+info - 2018-06-02 19:53:26,813 - _batch_size = 32, _average_loss = 8.587728, _total_loss = 274.80728
+info - 2018-06-02 19:53:32,079 - global_step/sec: 18.9735
+info - 2018-06-02 19:53:32,083 - loss = 1.184083, step = 113 (5.274 sec)
+info - 2018-06-02 19:53:33,192 - global_step/sec: 89.7873
+info - 2018-06-02 19:53:33,197 - loss = 0.16088945, step = 213 (1.114 sec)
+info - 2018-06-02 19:53:34,155 - global_step/sec: 103.988
+info - 2018-06-02 19:53:34,159 - loss = 0.15279597, step = 313 (0.962 sec)
+info - 2018-06-02 19:53:35,128 - global_step/sec: 102.707
+info - 2018-06-02 19:53:35,132 - loss = 0.08534976, step = 413 (0.974 sec)
+info - 2018-06-02 19:53:36,163 - global_step/sec: 96.6467
+info - 2018-06-02 19:53:36,167 - loss = 0.1437468, step = 513 (1.034 sec)
+info - 2018-06-02 19:53:37,122 - global_step/sec: 104.206
+info - 2018-06-02 19:53:37,127 - loss = 0.08188966, step = 613 (0.961 sec)
+info - 2018-06-02 19:53:38,119 - global_step/sec: 100.235
+info - 2018-06-02 19:53:38,124 - loss = 0.09306142, step = 713 (0.997 sec)
+info - 2018-06-02 19:53:39,186 - global_step/sec: 93.8341
+info - 2018-06-02 19:53:39,190 - loss = 0.06820993, step = 813 (1.067 sec)
+info - 2018-06-02 19:53:40,271 - global_step/sec: 92.1044
+info - 2018-06-02 19:53:40,276 - loss = 0.09314646, step = 913 (1.085 sec)
+info - 2018-06-02 19:53:41,324 - Saving checkpoints for 1013 into ./model_2\model.ckpt.
+info - 2018-06-02 19:53:42,109 - global_step/sec: 54.4002
+info - 2018-06-02 19:53:42,113 - loss = 0.07690497, step = 1013 (1.838 sec)
+info - 2018-06-02 19:53:42,115 - _batch_size = 32, _average_loss = 0.07690497, _total_loss = 2.460959 (15.303 sec)
+info - 2018-06-02 19:53:43,319 - global_step/sec: 82.7265
+info - 2018-06-02 19:53:43,326 - loss = 0.03557339, step = 1113 (1.212 sec)
+info - 2018-06-02 19:53:44,475 - global_step/sec: 86.5223
+info - 2018-06-02 19:53:44,479 - loss = 0.011896488, step = 1213 (1.154 sec)
+info - 2018-06-02 19:53:45,722 - global_step/sec: 80.139
+info - 2018-06-02 19:53:45,808 - loss = 0.024647735, step = 1313 (1.330 sec)
+info - 2018-06-02 19:53:47,453 - global_step/sec: 57.7984
+info - 2018-06-02 19:53:47,457 - loss = 0.01763264, step = 1413 (1.648 sec)
+info - 2018-06-02 19:53:48,540 - global_step/sec: 91.8505
+info - 2018-06-02 19:53:48,545 - loss = 0.046666313, step = 1513 (1.089 sec)
+info - 2018-06-02 19:53:49,787 - global_step/sec: 80.2677
+info - 2018-06-02 19:53:49,792 - loss = 0.05924487, step = 1613 (1.247 sec)
+info - 2018-06-02 19:53:50,867 - global_step/sec: 92.6167
+info - 2018-06-02 19:53:50,871 - loss = 0.04226866, step = 1713 (1.079 sec)
+info - 2018-06-02 19:53:52,155 - global_step/sec: 77.588
+info - 2018-06-02 19:53:52,161 - loss = 0.02994879, step = 1813 (1.290 sec)
+info - 2018-06-02 19:53:53,356 - global_step/sec: 83.2779
+info - 2018-06-02 19:53:53,360 - loss = 0.031350948, step = 1913 (1.200 sec)
+info - 2018-06-02 19:53:54,573 - Saving checkpoints for 2013 into ./model_2\model.ckpt.
+info - 2018-06-02 19:53:55,468 - global_step/sec: 47.3393
+info - 2018-06-02 19:53:55,471 - loss = 0.026772669, step = 2013 (2.110 sec)
+info - 2018-06-02 19:53:55,473 - _batch_size = 32, _average_loss = 0.026772669, _total_loss = 0.8567254 (13.358 sec)
+info - 2018-06-02 19:53:57,519 - global_step/sec: 48.748
+info - 2018-06-02 19:53:57,524 - loss = 0.013552951, step = 2113 (2.053 sec)
+info - 2018-06-02 19:54:00,176 - global_step/sec: 37.6539
+info - 2018-06-02 19:54:00,181 - loss = 0.027437475, step = 2213 (2.657 sec)
+info - 2018-06-02 19:54:02,438 - global_step/sec: 44.1987
+info - 2018-06-02 19:54:02,444 - loss = 0.01827658, step = 2313 (2.262 sec)
+info - 2018-06-02 19:54:03,695 - global_step/sec: 79.5014
+info - 2018-06-02 19:54:03,700 - loss = 0.047303155, step = 2413 (1.258 sec)
+info - 2018-06-02 19:54:05,034 - global_step/sec: 74.7444
+info - 2018-06-02 19:54:05,038 - loss = 0.021448549, step = 2513 (1.338 sec)
+info - 2018-06-02 19:54:06,035 - global_step/sec: 99.9325
+info - 2018-06-02 19:54:06,038 - loss = 0.04074809, step = 2613 (1.000 sec)
+info - 2018-06-02 19:54:07,014 - global_step/sec: 102.077
+info - 2018-06-02 19:54:07,017 - loss = 0.049422584, step = 2713 (0.979 sec)
+info - 2018-06-02 19:54:08,117 - global_step/sec: 90.6016
+info - 2018-06-02 19:54:08,121 - loss = 0.023641063, step = 2813 (1.105 sec)
+info - 2018-06-02 19:54:09,106 - global_step/sec: 101.25
+info - 2018-06-02 19:54:09,109 - loss = 0.0047030374, step = 2913 (0.988 sec)
+info - 2018-06-02 19:54:10,125 - Saving checkpoints for 3013 into ./model_2\model.ckpt.
+info - 2018-06-02 19:54:11,139 - global_step/sec: 49.1798
+info - 2018-06-02 19:54:11,143 - loss = 0.035342336, step = 3013 (2.034 sec)
+info - 2018-06-02 19:54:11,146 - _batch_size = 32, _average_loss = 0.035342336, _total_loss = 1.1309547 (15.673 sec)
+info - 2018-06-02 19:54:12,755 - global_step/sec: 61.8782
+info - 2018-06-02 19:54:12,760 - loss = 0.015549345, step = 3113 (1.616 sec)
+info - 2018-06-02 19:54:13,957 - global_step/sec: 83.2084
+info - 2018-06-02 19:54:13,962 - loss = 0.01461165, step = 3213 (1.203 sec)
+info - 2018-06-02 19:54:15,594 - global_step/sec: 61.0466
+info - 2018-06-02 19:54:15,599 - loss = 0.029946342, step = 3313 (1.637 sec)
+info - 2018-06-02 19:54:16,808 - global_step/sec: 82.4532
+info - 2018-06-02 19:54:16,812 - loss = 0.021438038, step = 3413 (1.213 sec)
+info - 2018-06-02 19:54:17,992 - global_step/sec: 84.4032
+info - 2018-06-02 19:54:18,004 - loss = 0.025170805, step = 3513 (1.192 sec)
+info - 2018-06-02 19:54:19,080 - global_step/sec: 92.0195
+info - 2018-06-02 19:54:19,084 - loss = 0.017097976, step = 3613 (1.080 sec)
+info - 2018-06-02 19:54:20,174 - global_step/sec: 91.2634
+info - 2018-06-02 19:54:20,179 - loss = 0.019460475, step = 3713 (1.096 sec)
+info - 2018-06-02 19:54:21,305 - global_step/sec: 88.515
+info - 2018-06-02 19:54:21,310 - loss = 0.037760317, step = 3813 (1.131 sec)
+info - 2018-06-02 19:54:22,358 - global_step/sec: 94.9036
+info - 2018-06-02 19:54:22,363 - loss = 0.022219922, step = 3913 (1.053 sec)
+info - 2018-06-02 19:54:23,353 - Saving checkpoints for 4013 into ./model_2\model.ckpt.
+info - 2018-06-02 19:54:24,102 - global_step/sec: 57.3341
+info - 2018-06-02 19:54:24,107 - loss = 0.010808415, step = 4013 (1.744 sec)
+info - 2018-06-02 19:54:24,109 - _batch_size = 32, _average_loss = 0.010808415, _total_loss = 0.34586927 (12.963 sec)
+info - 2018-06-02 19:54:25,326 - global_step/sec: 81.7116
+info - 2018-06-02 19:54:25,331 - loss = 0.014427723, step = 4113 (1.224 sec)
+info - 2018-06-02 19:54:26,492 - global_step/sec: 85.7798
+info - 2018-06-02 19:54:26,496 - loss = 0.015085712, step = 4213 (1.165 sec)
+info - 2018-06-02 19:54:27,620 - global_step/sec: 88.672
+info - 2018-06-02 19:54:27,625 - loss = 0.011518685, step = 4313 (1.130 sec)
+info - 2018-06-02 19:54:29,639 - global_step/sec: 49.5455
+info - 2018-06-02 19:54:29,643 - loss = 0.0071255104, step = 4413 (2.017 sec)
+info - 2018-06-02 19:54:30,787 - global_step/sec: 87.05
+info - 2018-06-02 19:54:30,792 - loss = 0.015513618, step = 4513 (1.149 sec)
+info - 2018-06-02 19:54:32,079 - global_step/sec: 77.4077
+info - 2018-06-02 19:54:32,084 - loss = 0.0065372195, step = 4613 (1.293 sec)
+info - 2018-06-02 19:54:33,080 - global_step/sec: 99.9326
+info - 2018-06-02 19:54:33,083 - loss = 0.031156557, step = 4713 (0.999 sec)
+info - 2018-06-02 19:54:34,071 - global_step/sec: 100.841
+info - 2018-06-02 19:54:34,075 - loss = 0.010388557, step = 4813 (0.992 sec)
+info - 2018-06-02 19:54:35,098 - global_step/sec: 97.3066
+info - 2018-06-02 19:54:35,102 - loss = 0.026760973, step = 4913 (1.028 sec)
+info - 2018-06-02 19:54:36,088 - Saving checkpoints for 5013 into ./model_2\model.ckpt.
+info - 2018-06-02 19:54:36,939 - global_step/sec: 54.3411
+info - 2018-06-02 19:54:36,943 - loss = 0.038420323, step = 5013 (1.840 sec)
+info - 2018-06-02 19:54:36,946 - _batch_size = 32, _average_loss = 0.038420323, _total_loss = 1.2294503 (12.837 sec)
+info - 2018-06-02 19:54:38,083 - global_step/sec: 87.3544
+info - 2018-06-02 19:54:38,088 - loss = 0.0034679067, step = 5113 (1.146 sec)
+info - 2018-06-02 19:54:39,359 - global_step/sec: 78.4407
+info - 2018-06-02 19:54:39,363 - loss = 0.010648085, step = 5213 (1.275 sec)
+info - 2018-06-02 19:54:40,513 - global_step/sec: 86.6724
+info - 2018-06-02 19:54:40,522 - loss = 0.008126577, step = 5313 (1.159 sec)
+info - 2018-06-02 19:54:42,658 - global_step/sec: 46.6106
+info - 2018-06-02 19:54:42,663 - loss = 0.06860445, step = 5413 (2.141 sec)
+info - 2018-06-02 19:54:44,341 - global_step/sec: 59.4135
+info - 2018-06-02 19:54:44,346 - loss = 0.01733076, step = 5513 (1.682 sec)
+info - 2018-06-02 19:54:45,626 - global_step/sec: 77.7691
+info - 2018-06-02 19:54:45,632 - loss = 0.007605087, step = 5613 (1.287 sec)
+info - 2018-06-02 19:54:45,750 - Saving checkpoints for 5622 into ./model_2\model.ckpt.
+info - 2018-06-02 19:54:47,026 - Loss for final step: 0.008251812.
+info - 2018-06-02 19:54:47,027 - END of MODEL #2 TRAINING
+info - 2018-06-02 19:54:47,028 - Train MODEL #3
+info - 2018-06-02 19:54:47,436 - Calling model_fn.
+info - 2018-06-02 19:54:53,897 - Done calling model_fn.
+info - 2018-06-02 19:54:53,902 - Create CheckpointSaverHook.
+info - 2018-06-02 19:54:55,616 - Graph was finalized.
+info - 2018-06-02 19:54:55,621 - Restoring parameters from ./model_3\model.ckpt-12
+info - 2018-06-02 19:54:56,174 - Running local_init_op.
+info - 2018-06-02 19:54:56,254 - Done running local_init_op.
+info - 2018-06-02 19:55:02,945 - Saving checkpoints for 13 into ./model_3\model.ckpt.
+info - 2018-06-02 19:55:03,905 - loss = 9.09953, step = 13
+info - 2018-06-02 19:55:03,907 - _batch_size = 32, _average_loss = 9.09953, _total_loss = 291.18497
+info - 2018-06-02 19:55:09,665 - global_step/sec: 17.3525
+info - 2018-06-02 19:55:09,669 - loss = 2.3688562, step = 113 (5.765 sec)
+info - 2018-06-02 19:55:10,683 - global_step/sec: 98.2629
+info - 2018-06-02 19:55:10,687 - loss = 0.17703933, step = 213 (1.018 sec)
+info - 2018-06-02 19:55:11,777 - global_step/sec: 91.4299
+info - 2018-06-02 19:55:11,781 - loss = 0.07546452, step = 313 (1.094 sec)
+info - 2018-06-02 19:55:12,857 - global_step/sec: 92.6171
+info - 2018-06-02 19:55:12,861 - loss = 0.07595494, step = 413 (1.081 sec)
+info - 2018-06-02 19:55:13,834 - global_step/sec: 102.286
+info - 2018-06-02 19:55:13,837 - loss = 0.081876986, step = 513 (0.976 sec)
+info - 2018-06-02 19:55:14,827 - global_step/sec: 100.739
+info - 2018-06-02 19:55:14,832 - loss = 0.100976415, step = 613 (0.995 sec)
+info - 2018-06-02 19:55:15,970 - global_step/sec: 87.5073
+info - 2018-06-02 19:55:15,975 - loss = 0.069368266, step = 713 (1.143 sec)
+info - 2018-06-02 19:55:17,088 - global_step/sec: 89.4658
+info - 2018-06-02 19:55:17,092 - loss = 0.06344388, step = 813 (1.118 sec)
+info - 2018-06-02 19:55:18,172 - global_step/sec: 92.2746
+info - 2018-06-02 19:55:18,176 - loss = 0.040092684, step = 913 (1.084 sec)
+info - 2018-06-02 19:55:19,214 - Saving checkpoints for 1013 into ./model_3\model.ckpt.
+info - 2018-06-02 19:55:20,048 - global_step/sec: 53.2978
+info - 2018-06-02 19:55:20,052 - loss = 0.060011268, step = 1013 (1.876 sec)
+info - 2018-06-02 19:55:20,054 - _batch_size = 32, _average_loss = 0.060011268, _total_loss = 1.9203606 (16.148 sec)
+info - 2018-06-02 19:55:21,327 - global_step/sec: 78.134
+info - 2018-06-02 19:55:21,332 - loss = 0.017623719, step = 1113 (1.279 sec)
+info - 2018-06-02 19:55:22,464 - global_step/sec: 87.9695
+info - 2018-06-02 19:55:22,469 - loss = 0.06054693, step = 1213 (1.138 sec)
+info - 2018-06-02 19:55:23,739 - global_step/sec: 78.6876
+info - 2018-06-02 19:55:23,769 - loss = 0.08554837, step = 1313 (1.299 sec)
+info - 2018-06-02 19:55:25,330 - global_step/sec: 62.7327
+info - 2018-06-02 19:55:25,380 - loss = 0.033194706, step = 1413 (1.611 sec)
+info - 2018-06-02 19:55:26,651 - global_step/sec: 75.7071
+info - 2018-06-02 19:55:26,655 - loss = 0.020655766, step = 1513 (1.276 sec)
+info - 2018-06-02 19:55:27,905 - global_step/sec: 79.7553
+info - 2018-06-02 19:55:27,910 - loss = 0.036453284, step = 1613 (1.255 sec)
+info - 2018-06-02 19:55:29,085 - global_step/sec: 84.6176
+info - 2018-06-02 19:55:29,089 - loss = 0.04285993, step = 1713 (1.180 sec)
+info - 2018-06-02 19:55:30,104 - global_step/sec: 98.2627
+info - 2018-06-02 19:55:30,108 - loss = 0.01976642, step = 1813 (1.018 sec)
+info - 2018-06-02 19:55:31,116 - global_step/sec: 98.8462
+info - 2018-06-02 19:55:31,120 - loss = 0.008637186, step = 1913 (1.013 sec)
+info - 2018-06-02 19:55:32,139 - Saving checkpoints for 2013 into ./model_3\model.ckpt.
+info - 2018-06-02 19:55:32,978 - global_step/sec: 53.6987
+info - 2018-06-02 19:55:32,982 - loss = 0.034073506, step = 2013 (1.862 sec)
+info - 2018-06-02 19:55:32,985 - _batch_size = 32, _average_loss = 0.034073506, _total_loss = 1.0903522 (12.931 sec)
+info - 2018-06-02 19:55:34,167 - global_step/sec: 84.119
+info - 2018-06-02 19:55:34,171 - loss = 0.00966234, step = 2113 (1.189 sec)
+info - 2018-06-02 19:55:35,403 - global_step/sec: 80.9177
+info - 2018-06-02 19:55:35,407 - loss = 0.013067479, step = 2213 (1.236 sec)
+info - 2018-06-02 19:55:36,735 - global_step/sec: 75.025
+info - 2018-06-02 19:55:36,740 - loss = 0.021553611, step = 2313 (1.334 sec)
+info - 2018-06-02 19:55:38,403 - global_step/sec: 59.9839
+info - 2018-06-02 19:55:38,409 - loss = 0.015021587, step = 2413 (1.667 sec)
+info - 2018-06-02 19:55:39,522 - global_step/sec: 89.2263
+info - 2018-06-02 19:55:39,527 - loss = 0.0330161, step = 2513 (1.120 sec)
+info - 2018-06-02 19:55:40,714 - global_step/sec: 83.9776
+info - 2018-06-02 19:55:40,718 - loss = 0.009861519, step = 2613 (1.191 sec)
+info - 2018-06-02 19:55:41,809 - global_step/sec: 91.3468
+info - 2018-06-02 19:55:41,814 - loss = 0.019715559, step = 2713 (1.095 sec)
+info - 2018-06-02 19:55:42,886 - global_step/sec: 92.7026
+info - 2018-06-02 19:55:42,892 - loss = 0.022814717, step = 2813 (1.079 sec)
+info - 2018-06-02 19:55:43,903 - global_step/sec: 98.4564
+info - 2018-06-02 19:55:43,907 - loss = 0.037447546, step = 2913 (1.016 sec)
+info - 2018-06-02 19:55:45,011 - Saving checkpoints for 3013 into ./model_3\model.ckpt.
+info - 2018-06-02 19:55:46,015 - global_step/sec: 47.3618
+info - 2018-06-02 19:55:46,020 - loss = 0.017461933, step = 3013 (2.111 sec)
+info - 2018-06-02 19:55:46,022 - _batch_size = 32, _average_loss = 0.017461933, _total_loss = 0.55878186 (13.037 sec)
+info - 2018-06-02 19:55:47,437 - global_step/sec: 70.3261
+info - 2018-06-02 19:55:47,452 - loss = 0.013881296, step = 3113 (1.433 sec)
+info - 2018-06-02 19:55:48,649 - global_step/sec: 82.3853
+info - 2018-06-02 19:55:48,653 - loss = 0.033291772, step = 3213 (1.202 sec)
+info - 2018-06-02 19:55:50,184 - global_step/sec: 65.1881
+info - 2018-06-02 19:55:50,189 - loss = 0.0481273, step = 3313 (1.536 sec)
+info - 2018-06-02 19:55:51,480 - global_step/sec: 77.1091
+info - 2018-06-02 19:55:51,485 - loss = 0.029706817, step = 3413 (1.296 sec)
+info - 2018-06-02 19:55:52,586 - global_step/sec: 90.5193
+info - 2018-06-02 19:55:52,590 - loss = 0.014978388, step = 3513 (1.105 sec)
+info - 2018-06-02 19:55:53,762 - global_step/sec: 85.0359
+info - 2018-06-02 19:55:53,777 - loss = 0.05382227, step = 3613 (1.187 sec)
+info - 2018-06-02 19:55:54,833 - global_step/sec: 93.325
+info - 2018-06-02 19:55:54,837 - loss = 0.019038282, step = 3713 (1.061 sec)
+info - 2018-06-02 19:55:55,912 - global_step/sec: 92.6167
+info - 2018-06-02 19:55:55,916 - loss = 0.05185794, step = 3813 (1.079 sec)
+info - 2018-06-02 19:55:57,037 - global_step/sec: 88.9877
+info - 2018-06-02 19:55:57,041 - loss = 0.012563941, step = 3913 (1.125 sec)
+info - 2018-06-02 19:55:58,064 - Saving checkpoints for 4013 into ./model_3\model.ckpt.
+info - 2018-06-02 19:55:58,912 - global_step/sec: 53.2978
+info - 2018-06-02 19:55:58,916 - loss = 0.022951195, step = 4013 (1.875 sec)
+info - 2018-06-02 19:55:58,918 - _batch_size = 32, _average_loss = 0.022951195, _total_loss = 0.73443824 (12.897 sec)
+info - 2018-06-02 19:56:00,676 - global_step/sec: 56.6836
+info - 2018-06-02 19:56:00,681 - loss = 0.007497455, step = 4113 (1.765 sec)
+info - 2018-06-02 19:56:02,136 - global_step/sec: 68.5414
+info - 2018-06-02 19:56:02,140 - loss = 0.009906275, step = 4213 (1.459 sec)
+info - 2018-06-02 19:56:03,248 - global_step/sec: 89.949
+info - 2018-06-02 19:56:03,252 - loss = 0.020749643, step = 4313 (1.112 sec)
+info - 2018-06-02 19:56:05,171 - global_step/sec: 51.9945
+info - 2018-06-02 19:56:05,175 - loss = 0.013038762, step = 4413 (1.923 sec)
+info - 2018-06-02 19:56:06,333 - global_step/sec: 86.0011
+info - 2018-06-02 19:56:06,338 - loss = 0.006578601, step = 4513 (1.162 sec)
+info - 2018-06-02 19:56:07,579 - global_step/sec: 80.3323
+info - 2018-06-02 19:56:07,583 - loss = 0.011251278, step = 4613 (1.246 sec)
+info - 2018-06-02 19:56:08,571 - global_step/sec: 100.738
+info - 2018-06-02 19:56:08,575 - loss = 0.012558953, step = 4713 (0.992 sec)
+info - 2018-06-02 19:56:09,652 - global_step/sec: 92.5316
+info - 2018-06-02 19:56:09,656 - loss = 0.022336392, step = 4813 (1.082 sec)
+info - 2018-06-02 19:56:10,719 - global_step/sec: 93.7455
+info - 2018-06-02 19:56:10,723 - loss = 0.014058489, step = 4913 (1.066 sec)
+info - 2018-06-02 19:56:11,803 - Saving checkpoints for 5013 into ./model_3\model.ckpt.
+info - 2018-06-02 19:56:12,745 - global_step/sec: 49.3256
+info - 2018-06-02 19:56:12,749 - loss = 0.019008989, step = 5013 (2.027 sec)
+info - 2018-06-02 19:56:12,752 - _batch_size = 32, _average_loss = 0.019008989, _total_loss = 0.60828763 (13.834 sec)
+info - 2018-06-02 19:56:14,132 - global_step/sec: 72.154
+info - 2018-06-02 19:56:14,136 - loss = 0.02680403, step = 5113 (1.387 sec)
+info - 2018-06-02 19:56:15,483 - global_step/sec: 73.9699
+info - 2018-06-02 19:56:15,488 - loss = 0.0067462334, step = 5213 (1.352 sec)
+info - 2018-06-02 19:56:17,171 - global_step/sec: 59.2725
+info - 2018-06-02 19:56:17,176 - loss = 0.0090462845, step = 5313 (1.688 sec)
+info - 2018-06-02 19:56:18,542 - global_step/sec: 72.8908
+info - 2018-06-02 19:56:18,547 - loss = 0.015272528, step = 5413 (1.370 sec)
+info - 2018-06-02 19:56:19,582 - global_step/sec: 96.2749
+info - 2018-06-02 19:56:19,586 - loss = 0.006602895, step = 5513 (1.040 sec)
+info - 2018-06-02 19:56:20,701 - global_step/sec: 89.3058
+info - 2018-06-02 19:56:20,706 - loss = 0.026952233, step = 5613 (1.120 sec)
+info - 2018-06-02 19:56:20,796 - Saving checkpoints for 5622 into ./model_3\model.ckpt.
+info - 2018-06-02 19:56:21,629 - Loss for final step: 0.02017369.
+info - 2018-06-02 19:56:21,629 - END of MODEL #3 TRAINING
+info - 2018-06-02 19:56:21,630 - Train MODEL #4
+info - 2018-06-02 19:56:21,874 - Calling model_fn.
+info - 2018-06-02 19:56:27,473 - Done calling model_fn.
+info - 2018-06-02 19:56:27,479 - Create CheckpointSaverHook.
+info - 2018-06-02 19:56:29,185 - Graph was finalized.
+info - 2018-06-02 19:56:29,190 - Restoring parameters from ./model_4\model.ckpt-12
+info - 2018-06-02 19:56:29,809 - Running local_init_op.
+info - 2018-06-02 19:56:29,873 - Done running local_init_op.
+info - 2018-06-02 19:56:36,454 - Saving checkpoints for 13 into ./model_4\model.ckpt.
+info - 2018-06-02 19:56:37,300 - loss = 7.458348, step = 13
+info - 2018-06-02 19:56:37,303 - _batch_size = 32, _average_loss = 7.458348, _total_loss = 238.66713
+info - 2018-06-02 19:56:45,744 - global_step/sec: 11.8397
+info - 2018-06-02 19:56:45,749 - loss = 0.5818341, step = 113 (8.449 sec)
+info - 2018-06-02 19:56:47,085 - global_step/sec: 74.5771
+info - 2018-06-02 19:56:47,090 - loss = 0.106971465, step = 213 (1.341 sec)
+info - 2018-06-02 19:56:48,563 - global_step/sec: 67.7055
+info - 2018-06-02 19:56:48,568 - loss = 0.04989717, step = 313 (1.477 sec)
+info - 2018-06-02 19:56:49,814 - global_step/sec: 79.8828
+info - 2018-06-02 19:56:49,823 - loss = 0.04418116, step = 413 (1.256 sec)
+info - 2018-06-02 19:56:51,111 - global_step/sec: 77.1091
+info - 2018-06-02 19:56:51,116 - loss = 0.09584947, step = 513 (1.293 sec)
+info - 2018-06-02 19:56:52,479 - global_step/sec: 73.1041
+info - 2018-06-02 19:56:52,484 - loss = 0.044086307, step = 613 (1.369 sec)
+info - 2018-06-02 19:56:53,708 - global_step/sec: 81.3789
+info - 2018-06-02 19:56:53,712 - loss = 0.023931162, step = 713 (1.228 sec)
+info - 2018-06-02 19:56:54,978 - global_step/sec: 78.7497
+info - 2018-06-02 19:56:54,983 - loss = 0.030175686, step = 813 (1.270 sec)
+info - 2018-06-02 19:56:56,142 - global_step/sec: 85.9271
+info - 2018-06-02 19:56:56,147 - loss = 0.027228616, step = 913 (1.164 sec)
+info - 2018-06-02 19:56:57,373 - Saving checkpoints for 1013 into ./model_4\model.ckpt.
+info - 2018-06-02 19:56:58,504 - global_step/sec: 42.3088
+info - 2018-06-02 19:56:58,509 - loss = 0.04722978, step = 1013 (2.364 sec)
+info - 2018-06-02 19:56:58,512 - _batch_size = 32, _average_loss = 0.04722978, _total_loss = 1.511353 (21.210 sec)
+info - 2018-06-02 19:56:59,840 - global_step/sec: 74.9126
+info - 2018-06-02 19:56:59,845 - loss = 0.03157931, step = 1113 (1.335 sec)
+info - 2018-06-02 19:57:01,366 - global_step/sec: 65.4871
+info - 2018-06-02 19:57:01,371 - loss = 0.029969372, step = 1213 (1.527 sec)
+info - 2018-06-02 19:57:03,149 - global_step/sec: 56.1108
+info - 2018-06-02 19:57:03,188 - loss = 0.019330636, step = 1313 (1.816 sec)
+info - 2018-06-02 19:57:04,791 - global_step/sec: 60.8979
+info - 2018-06-02 19:57:04,796 - loss = 0.008095008, step = 1413 (1.608 sec)
+info - 2018-06-02 19:57:06,032 - global_step/sec: 80.5263
+info - 2018-06-02 19:57:06,037 - loss = 0.04029385, step = 1513 (1.242 sec)
+info - 2018-06-02 19:57:07,257 - global_step/sec: 81.645
+info - 2018-06-02 19:57:07,263 - loss = 0.023430424, step = 1613 (1.225 sec)
+info - 2018-06-02 19:57:08,422 - global_step/sec: 85.8534
+info - 2018-06-02 19:57:08,427 - loss = 0.033123486, step = 1713 (1.165 sec)
+info - 2018-06-02 19:57:09,723 - global_step/sec: 76.8718
+info - 2018-06-02 19:57:09,729 - loss = 0.026674226, step = 1813 (1.302 sec)
+info - 2018-06-02 19:57:10,949 - global_step/sec: 81.5782
+info - 2018-06-02 19:57:10,954 - loss = 0.04450522, step = 1913 (1.225 sec)
+info - 2018-06-02 19:57:12,251 - Saving checkpoints for 2013 into ./model_4\model.ckpt.
+info - 2018-06-02 19:57:13,588 - global_step/sec: 37.911
+info - 2018-06-02 19:57:13,600 - loss = 0.013331953, step = 2013 (2.646 sec)
+info - 2018-06-02 19:57:13,604 - _batch_size = 32, _average_loss = 0.013331953, _total_loss = 0.4266225 (15.091 sec)
+info - 2018-06-02 19:57:14,874 - global_step/sec: 77.6482
+info - 2018-06-02 19:57:14,879 - loss = 0.062385194, step = 2113 (1.280 sec)
+info - 2018-06-02 19:57:16,224 - global_step/sec: 74.0796
+info - 2018-06-02 19:57:16,229 - loss = 0.056756783, step = 2213 (1.350 sec)
+info - 2018-06-02 19:57:18,062 - global_step/sec: 54.4596
+info - 2018-06-02 19:57:18,068 - loss = 0.01982841, step = 2313 (1.837 sec)
+info - 2018-06-02 19:57:19,809 - global_step/sec: 57.2356
+info - 2018-06-02 19:57:19,813 - loss = 0.021678353, step = 2413 (1.746 sec)
+info - 2018-06-02 19:57:21,236 - global_step/sec: 70.0795
+info - 2018-06-02 19:57:21,242 - loss = 0.023347711, step = 2513 (1.429 sec)
+info - 2018-06-02 19:57:22,465 - global_step/sec: 81.2466
+info - 2018-06-02 19:57:22,470 - loss = 0.018166458, step = 2613 (1.229 sec)
+info - 2018-06-02 19:57:23,622 - global_step/sec: 86.4476
+info - 2018-06-02 19:57:23,627 - loss = 0.024004068, step = 2713 (1.157 sec)
+info - 2018-06-02 19:57:24,778 - global_step/sec: 86.5224
+info - 2018-06-02 19:57:24,783 - loss = 0.02397511, step = 2813 (1.156 sec)
+info - 2018-06-02 19:57:25,992 - global_step/sec: 82.3853
+info - 2018-06-02 19:57:25,997 - loss = 0.045642417, step = 2913 (1.214 sec)
+info - 2018-06-02 19:57:27,213 - Saving checkpoints for 3013 into ./model_4\model.ckpt.
+info - 2018-06-02 19:57:28,870 - global_step/sec: 34.7473
+info - 2018-06-02 19:57:28,875 - loss = 0.017737618, step = 3013 (2.878 sec)
+info - 2018-06-02 19:57:28,877 - _batch_size = 32, _average_loss = 0.017737618, _total_loss = 0.56760377 (15.273 sec)
+info - 2018-06-02 19:57:30,534 - global_step/sec: 60.1283
+info - 2018-06-02 19:57:30,538 - loss = 0.011137113, step = 3113 (1.663 sec)
+info - 2018-06-02 19:57:32,355 - global_step/sec: 54.9084
+info - 2018-06-02 19:57:32,359 - loss = 0.025921136, step = 3213 (1.821 sec)
+info - 2018-06-02 19:57:34,656 - global_step/sec: 43.4682
+info - 2018-06-02 19:57:34,660 - loss = 0.021469325, step = 3313 (2.301 sec)
+info - 2018-06-02 19:57:36,217 - global_step/sec: 64.0188
+info - 2018-06-02 19:57:36,222 - loss = 0.011374473, step = 3413 (1.562 sec)
+info - 2018-06-02 19:57:37,606 - global_step/sec: 72.05
+info - 2018-06-02 19:57:37,611 - loss = 0.027374856, step = 3513 (1.389 sec)
+info - 2018-06-02 19:57:38,782 - global_step/sec: 84.9773
+info - 2018-06-02 19:57:38,787 - loss = 0.012873062, step = 3613 (1.176 sec)
+info - 2018-06-02 19:57:39,861 - global_step/sec: 92.7025
+info - 2018-06-02 19:57:39,866 - loss = 0.028751696, step = 3713 (1.080 sec)
+info - 2018-06-02 19:57:41,172 - global_step/sec: 76.2851
+info - 2018-06-02 19:57:41,177 - loss = 0.015556451, step = 3813 (1.311 sec)
+info - 2018-06-02 19:57:42,370 - global_step/sec: 83.4865
+info - 2018-06-02 19:57:42,377 - loss = 0.034614738, step = 3913 (1.200 sec)
+info - 2018-06-02 19:57:43,621 - Saving checkpoints for 4013 into ./model_4\model.ckpt.
+info - 2018-06-02 19:57:44,586 - global_step/sec: 45.0963
+info - 2018-06-02 19:57:44,590 - loss = 0.013077165, step = 4013 (2.213 sec)
+info - 2018-06-02 19:57:44,592 - _batch_size = 32, _average_loss = 0.013077165, _total_loss = 0.41846928 (15.715 sec)
+info - 2018-06-02 19:57:45,968 - global_step/sec: 72.4154
+info - 2018-06-02 19:57:45,972 - loss = 0.014662421, step = 4113 (1.382 sec)
+info - 2018-06-02 19:57:47,456 - global_step/sec: 67.2047
+info - 2018-06-02 19:57:47,461 - loss = 0.008777555, step = 4213 (1.489 sec)
+info - 2018-06-02 19:57:49,113 - global_step/sec: 60.3462
+info - 2018-06-02 19:57:49,120 - loss = 0.015686281, step = 4313 (1.658 sec)
+info - 2018-06-02 19:57:50,644 - global_step/sec: 65.3159
+info - 2018-06-02 19:57:50,649 - loss = 0.012950988, step = 4413 (1.529 sec)
+info - 2018-06-02 19:57:51,785 - global_step/sec: 87.661
+info - 2018-06-02 19:57:51,790 - loss = 0.004832831, step = 4513 (1.141 sec)
+info - 2018-06-02 19:57:53,061 - global_step/sec: 78.3176
+info - 2018-06-02 19:57:53,066 - loss = 0.0066047125, step = 4613 (1.277 sec)
+info - 2018-06-02 19:57:54,088 - global_step/sec: 97.401
+info - 2018-06-02 19:57:54,092 - loss = 0.008351224, step = 4713 (1.026 sec)
+info - 2018-06-02 19:57:55,069 - global_step/sec: 101.868
+info - 2018-06-02 19:57:55,073 - loss = 0.01897103, step = 4813 (0.982 sec)
+info - 2018-06-02 19:57:56,102 - global_step/sec: 96.8353
+info - 2018-06-02 19:57:56,105 - loss = 0.0065765413, step = 4913 (1.032 sec)
+info - 2018-06-02 19:57:57,097 - Saving checkpoints for 5013 into ./model_4\model.ckpt.
+info - 2018-06-02 19:57:57,917 - global_step/sec: 55.09
+info - 2018-06-02 19:57:57,921 - loss = 0.016270105, step = 5013 (1.816 sec)
+info - 2018-06-02 19:57:57,924 - _batch_size = 32, _average_loss = 0.016270105, _total_loss = 0.52064335 (13.332 sec)
+info - 2018-06-02 19:57:59,103 - global_step/sec: 84.4032
+info - 2018-06-02 19:57:59,107 - loss = 0.0155072585, step = 5113 (1.186 sec)
+info - 2018-06-02 19:58:00,661 - global_step/sec: 64.1832
+info - 2018-06-02 19:58:00,665 - loss = 0.01521384, step = 5213 (1.558 sec)
+info - 2018-06-02 19:58:02,260 - global_step/sec: 62.5757
+info - 2018-06-02 19:58:02,318 - loss = 0.009885882, step = 5313 (1.653 sec)
+info - 2018-06-02 19:58:04,067 - global_step/sec: 55.2728
+info - 2018-06-02 19:58:04,073 - loss = 0.00870332, step = 5413 (1.755 sec)
+info - 2018-06-02 19:58:05,148 - global_step/sec: 92.5311
+info - 2018-06-02 19:58:05,153 - loss = 0.020506434, step = 5513 (1.080 sec)
+info - 2018-06-02 19:58:06,330 - global_step/sec: 84.6169
+info - 2018-06-02 19:58:06,334 - loss = 0.005647864, step = 5613 (1.181 sec)
+info - 2018-06-02 19:58:06,435 - Saving checkpoints for 5622 into ./model_4\model.ckpt.
+info - 2018-06-02 19:58:07,261 - Loss for final step: 0.072906494.
+info - 2018-06-02 19:58:07,262 - END of MODEL #4 TRAINING
+info - 2018-06-02 19:58:50,836 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:58:50,836 -  ***** Evaluation results *****
+info - 2018-06-02 19:58:50,838 -  *****      #1 MODEL      *****
+info - 2018-06-02 19:58:51,115 - Calling model_fn.
+info - 2018-06-02 19:58:52,617 - Done calling model_fn.
+info - 2018-06-02 19:58:52,715 - Starting evaluation at 2018-06-02-10:58:52
+info - 2018-06-02 19:58:53,179 - Graph was finalized.
+info - 2018-06-02 19:58:53,180 - Restoring parameters from ./model_1\model.ckpt-5622
+info - 2018-06-02 19:58:53,454 - Running local_init_op.
+info - 2018-06-02 19:58:53,515 - Done running local_init_op.
+info - 2018-06-02 19:58:54,091 - Finished evaluation at 2018-06-02-10:58:54
+info - 2018-06-02 19:58:54,092 - Saving dict for global step 5622: accuracy = 1.0, global_step = 5622, loss = 0.006589643, rmse = 0.081176616
+info - 2018-06-02 19:58:54,742 -    loss ---> 0.006589643191546202
+info - 2018-06-02 19:58:54,743 -    accuracy ---> 1.0
+info - 2018-06-02 19:58:54,744 -    global_step ---> 5622
+info - 2018-06-02 19:58:54,744 -    rmse ---> 0.08117661625146866
+info - 2018-06-02 19:58:54,745 -  ******************************
+info - 2018-06-02 19:58:54,746 -  ******************************
+info - 2018-06-02 19:58:54,746 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:58:54,747 -  ***** Evaluation results *****
+info - 2018-06-02 19:58:54,747 -  *****      #2 MODEL      *****
+info - 2018-06-02 19:58:54,992 - Calling model_fn.
+info - 2018-06-02 19:58:56,529 - Done calling model_fn.
+info - 2018-06-02 19:58:56,685 - Starting evaluation at 2018-06-02-10:58:56
+info - 2018-06-02 19:58:57,572 - Graph was finalized.
+info - 2018-06-02 19:58:57,573 - Restoring parameters from ./model_2\model.ckpt-5622
+info - 2018-06-02 19:58:57,840 - Running local_init_op.
+info - 2018-06-02 19:58:57,909 - Done running local_init_op.
+info - 2018-06-02 19:58:58,477 - Finished evaluation at 2018-06-02-10:58:58
+info - 2018-06-02 19:58:58,477 - Saving dict for global step 5622: accuracy = 1.0, global_step = 5622, loss = 0.004480679, rmse = 0.06693787
+info - 2018-06-02 19:58:59,134 -    loss ---> 0.004480679053813219
+info - 2018-06-02 19:58:59,135 -    accuracy ---> 1.0
+info - 2018-06-02 19:58:59,136 -    global_step ---> 5622
+info - 2018-06-02 19:58:59,137 -    rmse ---> 0.0669378712773323
+info - 2018-06-02 19:58:59,137 -  ******************************
+info - 2018-06-02 19:58:59,138 -  ******************************
+info - 2018-06-02 19:58:59,138 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:58:59,139 -  ***** Evaluation results *****
+info - 2018-06-02 19:58:59,139 -  *****      #3 MODEL      *****
+info - 2018-06-02 19:58:59,339 - Calling model_fn.
+info - 2018-06-02 19:59:00,905 - Done calling model_fn.
+info - 2018-06-02 19:59:01,047 - Starting evaluation at 2018-06-02-10:59:01
+info - 2018-06-02 19:59:01,484 - Graph was finalized.
+info - 2018-06-02 19:59:01,486 - Restoring parameters from ./model_3\model.ckpt-5622
+info - 2018-06-02 19:59:01,780 - Running local_init_op.
+info - 2018-06-02 19:59:01,846 - Done running local_init_op.
+info - 2018-06-02 19:59:02,421 - Finished evaluation at 2018-06-02-10:59:02
+info - 2018-06-02 19:59:02,422 - Saving dict for global step 5622: accuracy = 1.0, global_step = 5622, loss = 0.0076298066, rmse = 0.08734877
+info - 2018-06-02 19:59:03,093 -    loss ---> 0.007629806641489267
+info - 2018-06-02 19:59:03,094 -    accuracy ---> 1.0
+info - 2018-06-02 19:59:03,094 -    global_step ---> 5622
+info - 2018-06-02 19:59:03,095 -    rmse ---> 0.08734876662492752
+info - 2018-06-02 19:59:03,096 -  ******************************
+info - 2018-06-02 19:59:03,097 -  ******************************
+info - 2018-06-02 19:59:03,098 - Evaluation results of 1st MODEL
+info - 2018-06-02 19:59:03,098 -  ***** Evaluation results *****
+info - 2018-06-02 19:59:03,099 -  *****      #4 MODEL      *****
+info - 2018-06-02 19:59:03,347 - Calling model_fn.
+info - 2018-06-02 19:59:05,250 - Done calling model_fn.
+info - 2018-06-02 19:59:05,441 - Starting evaluation at 2018-06-02-10:59:05
+info - 2018-06-02 19:59:05,872 - Graph was finalized.
+info - 2018-06-02 19:59:05,874 - Restoring parameters from ./model_4\model.ckpt-5622
+info - 2018-06-02 19:59:06,148 - Running local_init_op.
+info - 2018-06-02 19:59:06,213 - Done running local_init_op.
+info - 2018-06-02 19:59:06,742 - Finished evaluation at 2018-06-02-10:59:06
+info - 2018-06-02 19:59:06,743 - Saving dict for global step 5622: accuracy = 1.0, global_step = 5622, loss = 0.0034620676, rmse = 0.058839336
+info - 2018-06-02 19:59:07,426 -    loss ---> 0.003462067572399974
+info - 2018-06-02 19:59:07,427 -    accuracy ---> 1.0
+info - 2018-06-02 19:59:07,427 -    global_step ---> 5622
+info - 2018-06-02 19:59:07,428 -    rmse ---> 0.0588393360376358
+info - 2018-06-02 19:59:07,428 -  ******************************
+info - 2018-06-02 19:59:07,429 -  ******************************
+info - 2018-06-02 19:59:07,430 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:59:07,430 -  *****        1st MODEL        ***** 
+info - 2018-06-02 19:59:07,701 - Calling model_fn.
+info - 2018-06-02 19:59:09,145 - Done calling model_fn.
+info - 2018-06-02 19:59:09,627 - Graph was finalized.
+info - 2018-06-02 19:59:09,628 - Restoring parameters from ./model_1\model.ckpt-5622
+info - 2018-06-02 19:59:09,920 - Running local_init_op.
+info - 2018-06-02 19:59:09,959 - Done running local_init_op.
+info - 2018-06-02 19:59:10,264 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:59:10,265 -  *****        2st MODEL        ***** 
+info - 2018-06-02 19:59:10,483 - Calling model_fn.
+info - 2018-06-02 19:59:11,587 - Done calling model_fn.
+info - 2018-06-02 19:59:12,146 - Graph was finalized.
+info - 2018-06-02 19:59:12,148 - Restoring parameters from ./model_2\model.ckpt-5622
+info - 2018-06-02 19:59:12,432 - Running local_init_op.
+info - 2018-06-02 19:59:12,472 - Done running local_init_op.
+info - 2018-06-02 19:59:12,861 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:59:12,862 -  *****        3st MODEL        ***** 
+info - 2018-06-02 19:59:13,203 - Calling model_fn.
+info - 2018-06-02 19:59:14,282 - Done calling model_fn.
+info - 2018-06-02 19:59:14,670 - Graph was finalized.
+info - 2018-06-02 19:59:14,671 - Restoring parameters from ./model_3\model.ckpt-5622
+info - 2018-06-02 19:59:14,940 - Running local_init_op.
+info - 2018-06-02 19:59:14,976 - Done running local_init_op.
+info - 2018-06-02 19:59:15,285 -  ***** Prediction on test file ***** 
+info - 2018-06-02 19:59:15,285 -  *****        4st MODEL        ***** 
+info - 2018-06-02 19:59:15,490 - Calling model_fn.
+info - 2018-06-02 19:59:16,634 - Done calling model_fn.
+info - 2018-06-02 19:59:17,072 - Graph was finalized.
+info - 2018-06-02 19:59:17,074 - Restoring parameters from ./model_4\model.ckpt-5622
+info - 2018-06-02 19:59:17,297 - Running local_init_op.
+info - 2018-06-02 19:59:17,331 - Done running local_init_op.
+info - 2018-06-02 19:59:17,633 -  ***** Memory Base Predictions ***** 
+info - 2018-06-02 19:59:17,751 - Calling model_fn.
+info - 2018-06-02 19:59:18,906 - Done calling model_fn.
+info - 2018-06-02 19:59:19,776 - Graph was finalized.
+info - 2018-06-02 19:59:19,778 - Restoring parameters from ./model_1\model.ckpt-5622
+info - 2018-06-02 19:59:20,090 - Running local_init_op.
+info - 2018-06-02 19:59:20,150 - Done running local_init_op.
+info - 2018-06-02 19:59:20,757 - Calling model_fn.
+info - 2018-06-02 19:59:21,814 - Done calling model_fn.
+info - 2018-06-02 19:59:22,238 - Graph was finalized.
+info - 2018-06-02 19:59:22,240 - Restoring parameters from ./model_2\model.ckpt-5622
+info - 2018-06-02 19:59:22,532 - Running local_init_op.
+info - 2018-06-02 19:59:22,554 - Done running local_init_op.
+info - 2018-06-02 19:59:23,220 - Calling model_fn.
+info - 2018-06-02 19:59:24,652 - Done calling model_fn.
+info - 2018-06-02 19:59:25,278 - Graph was finalized.
+info - 2018-06-02 19:59:25,280 - Restoring parameters from ./model_3\model.ckpt-5622
+info - 2018-06-02 19:59:25,570 - Running local_init_op.
+info - 2018-06-02 19:59:25,590 - Done running local_init_op.
+info - 2018-06-02 19:59:26,119 - Calling model_fn.
+info - 2018-06-02 19:59:27,563 - Done calling model_fn.
+info - 2018-06-02 19:59:28,141 - Graph was finalized.
+info - 2018-06-02 19:59:28,143 - Restoring parameters from ./model_4\model.ckpt-5622
+info - 2018-06-02 19:59:28,538 - Running local_init_op.
+info - 2018-06-02 19:59:28,586 - Done running local_init_op.
+info - 2018-06-02 19:59:29,209 -  ***** Total End of Job ***** 
