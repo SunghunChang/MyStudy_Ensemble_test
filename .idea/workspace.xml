@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86691fc4-7a3c-4e76-9dc1-44b55c86119d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Model_Plot_WnB.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model_Plot_WnB.py" afterDir="false" />
+    <list default="true" id="86691fc4-7a3c-4e76-9dc1-44b55c86119d" name="Default" comment="Modify Colormap">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00_Run_Logging/INFO_logging_CSH.log" beforeDir="false" afterPath="$PROJECT_DIR$/00_Run_Logging/INFO_logging_CSH.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00_Run_Logging/Run_Results.log" beforeDir="false" afterPath="$PROJECT_DIR$/00_Run_Logging/Run_Results.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 1_2018-06-02_19-46-38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 1_2018-06-02_19-51-22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 2_2018-06-02_19-46-38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 2_2018-06-02_19-51-22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 3_2018-06-02_19-46-38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 3_2018-06-02_19-51-22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 4_2018-06-02_19-46-38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01_Run_Weight_n_Bias/Model_ 4_2018-06-02_19-51-22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model_Definitions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Model_Definitions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,31 +32,34 @@
       <file leaf-file-name="RoofCrush_Regression_Ensemble_v1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2337">
-              <caret line="134" column="33" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Model_Definitions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Model_Definitions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+            <state relative-caret-position="-111">
+              <caret line="284" column="31" selection-start-line="284" selection-start-column="31" selection-end-line="284" selection-end-column="31" />
               <folding>
-                <element signature="e#644#707#0" />
-                <element signature="e#838#2028#0" />
-                <element signature="e#2084#2375#0" />
+                <element signature="e#372#387#0" expanded="true" />
+                <element signature="e#21816#21936#0" />
+                <element signature="e#22749#24264#1" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model_Plot_WnB.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Model_Definitions.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Model_Definitions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="86">
+              <caret line="233" column="13" selection-start-line="233" selection-start-column="13" selection-end-line="233" selection-end-column="13" />
+              <folding>
+                <element signature="e#644#707#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Model_Plot_WnB.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model_Plot_WnB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="228">
+              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -56,6 +72,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>parser</find>
+      <find>accuracy</find>
+      <find>mae_values</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -70,15 +88,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v0.py" />
-        <option value="$PROJECT_DIR$/Model_Definitions.py" />
-        <option value="$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py" />
         <option value="$PROJECT_DIR$/Model_Plot_WnB.py" />
+        <option value="$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py" />
+        <option value="$PROJECT_DIR$/Model_Definitions.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="width" value="978" />
+    <option name="x" value="950" />
+    <option name="width" value="980" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
@@ -102,7 +120,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -130,7 +148,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py" />
-      <option name="PARAMETERS" value="--epoch=500 --shuffle=256 --model=4 --wbplot=False" />
+      <option name="PARAMETERS" value="--epoch=500 --shuffle=256 --model=1 --wbplot=False" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -210,13 +228,13 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.24983476" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49507734" visible="true" weight="0.24983476" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32911393" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5009914" side_tool="true" weight="0.54289734" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4990086" weight="0.38818565" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.28370786" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4990086" weight="0.4739803" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.28270042" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info id="Structure" order="1" sideWeight="0.5021097" side_tool="true" visible="true" weight="0.24983476" />
+      <window_info id="Structure" order="1" sideWeight="0.5049226" side_tool="true" visible="true" weight="0.24983476" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994374" />
       <window_info id="Favorites" order="2" sideWeight="0.5010482" side_tool="true" weight="0.24983476" />
@@ -301,6 +319,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2546">
           <caret line="134" column="33" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
+          <folding>
+            <element signature="e#372#387#0" expanded="true" />
+            <element signature="e#21816#21936#0" />
+            <element signature="e#22749#24264#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model_Definitions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+          <folding>
+            <element signature="e#644#707#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model_Plot_WnB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2546">
+          <caret line="134" column="33" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -310,8 +360,33 @@
           <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
           <folding>
             <element signature="e#644#707#0" />
-            <element signature="e#838#2028#0" />
-            <element signature="e#2084#2375#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model_Plot_WnB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2546">
+          <caret line="134" column="33" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model_Definitions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1463">
+          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
+          <folding>
+            <element signature="e#644#707#0" />
           </folding>
         </state>
       </provider>
@@ -339,8 +414,6 @@
           <caret line="77" column="33" lean-forward="true" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
           <folding>
             <element signature="e#644#707#0" />
-            <element signature="e#838#2028#0" />
-            <element signature="e#2084#2375#0" />
           </folding>
         </state>
       </provider>
@@ -358,8 +431,6 @@
           <caret line="163" column="45" selection-start-line="163" selection-start-column="45" selection-end-line="163" selection-end-column="45" />
           <folding>
             <element signature="e#644#707#0" />
-            <element signature="e#838#2028#0" />
-            <element signature="e#2084#2375#0" />
           </folding>
         </state>
       </provider>
@@ -420,25 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Model_Definitions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-          <folding>
-            <element signature="e#644#707#0" />
-            <element signature="e#838#2028#0" />
-            <element signature="e#2084#2375#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2337">
-          <caret line="134" column="33" selection-start-line="134" selection-start-column="33" selection-end-line="134" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python35/Lib/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -462,10 +514,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Model_Plot_WnB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="228">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RoofCrush_Regression_Ensemble_v1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-111">
+          <caret line="284" column="31" selection-start-line="284" selection-start-column="31" selection-end-line="284" selection-end-column="31" />
+          <folding>
+            <element signature="e#372#387#0" expanded="true" />
+            <element signature="e#21816#21936#0" />
+            <element signature="e#22749#24264#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model_Definitions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="233" column="13" selection-start-line="233" selection-start-column="13" selection-end-line="233" selection-end-column="13" />
+          <folding>
+            <element signature="e#644#707#0" />
           </folding>
         </state>
       </provider>

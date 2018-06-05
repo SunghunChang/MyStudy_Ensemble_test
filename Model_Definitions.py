@@ -194,6 +194,7 @@ def my_model_fn(
                                                #"_predictions":predictions['Squeeze']}, # It works but too many number. ex>32
                                                every_n_iter=params["train_logging"])
 
+
     # Default optimizer for DNN Regression : Adam with learning rate=0.001
     # Our objective (train_op) is to minimize loss
     # Provide global step counter (used to count gradient updates)
@@ -203,6 +204,17 @@ def my_model_fn(
             with tf.control_dependencies(update_ops):
                 #optimizer = tf.train.AdamOptimizer(0.001, name="My_Optimizer")
                 train_op = tf.train.AdamOptimizer(0.001, name="My_Optimizer").minimize(loss=average_loss, global_step=tf.train.get_global_step())
+
+        ''' 내부 변수 출력 예제
+        # Trainable 변수 이름과 Shape 출력  - 되긴함 : 별도 로그파일로 출력??
+        # trainable_variables / all_variables
+        variables_names = [v.name for v in tf.all_variables()]
+        values = [v for v in tf.all_variables()] #variables_names.eval()
+        for k, v in zip(variables_names, values):
+            print("Name : ", k, " / shape : ", v.shape)
+            #print("value : ", tf.get_variable('Model_1_Layers/First_Hidden_Layer/kernel')) 이건 안됨
+        '''
+
         # Return training operations: loss and train_op
         return tf.estimator.EstimatorSpec(
             mode,
@@ -218,19 +230,20 @@ def my_model_fn(
     #with tf.name_scope('Eval_Scope'):
     with tf.variable_scope('Eval_Scope'):
         # Calculate the accuracy between the true labels, and our predictions
+        # 아래 Label등은 숫자 하나가 아니라 배치가 다 들어온 것인가보다...
         rmse = tf.metrics.root_mean_squared_error(labels, predictions['Squeeze'])
-        # accuracy = tf.metrics.accuracy(labels, predictions['Squeeze'])
-        accuracy = tf.metrics.recall(labels, predictions['Squeeze'])
+        mae = tf.metrics.mean_absolute_error(labels, predictions['Squeeze'])
+        #accuracy = tf.metrics.recall(labels, predictions['Squeeze'])
 
         # Add the rmse to the collection of evaluation metrics.
-        eval_metrics = {"rmse": rmse, "accuracy": accuracy}
+        eval_metrics = {"rmse": rmse, "mae": mae}
 
     # Set the TensorBoard scalar my_accuracy to the accuracy
      # Obs: This function only sets the value during mode == ModeKeys.TRAIN
     # To set values during evaluation, see eval_metrics_ops
 
-    #    tf.summary.scalar('my_accuracy', accuracy)
-        tf.summary.scalar('diff', predictions['Squeeze']-labels)
+    #    tf.summary.scalar('my_accuracy', mae)
+        tf.summary.scalar('mae', tf.metrics.mean_absolute_error(labels, predictions['Squeeze'])) # predictions['Squeeze']-labels)
 
     ################################################ 3. Evaluation mode ################################################
     # Return our loss (which is used to evaluate our model)
@@ -238,6 +251,20 @@ def my_model_fn(
     # Obs: This function only sets value during mode == ModeKeys.EVAL
     # To set values during training, see tf.summary.scalar
     if mode == tf.estimator.ModeKeys.EVAL:
+
+        ''' 내부 변수 출력 예제
+        # Write ALL Operations in Graph
+        # 그래프 오퍼레이션 이름 모두 출력
+        # 이게 Training에서 찍을때랑 Eval에서 찍을때 보이는 그래프들이 다름. 파일로 별도출력하여 아래와 비교 필요 - 로그파일로 빼자
+        print("Write ALL Operations in This Graph")
+        for op in tf.get_default_graph().get_operations(): print(str(op.name))
+
+        # Write ALL Operations in Graph. I think it is same as above
+        # 위에꺼랑 결과 같은것 같은데... 둘다 따로 파일로 찍어보고 비교 필요함
+        print("Write ALL Operations in Tensor Name")
+        for n in tf.get_default_graph().as_graph_def().node: print(str(n.name))
+        '''
+
         return tf.estimator.EstimatorSpec(
             mode,
             #loss=total_loss,

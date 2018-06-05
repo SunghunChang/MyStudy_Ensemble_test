@@ -210,7 +210,7 @@ for k in range(1, Num_Of_Models + 1):
 #        print("test_PRINT : " + trained["_total_loss"])
 #    print("test_PRINT : " + train_result["training_hooks"])
 
-# Display Weight and Bias
+# Display Weight and Bias [After training is done]
 for k in range(0, Num_Of_Models):
     weight_layer_1 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/First_Hidden_Layer/kernel')
     bias_layer_1 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/First_Hidden_Layer/bias')
@@ -229,7 +229,7 @@ for k in range(0, Num_Of_Models):
 # Evaluate the model using the data contained in FILE_TEST
 # Return value will contain evaluation_metrics such as: loss & average_loss
 loss_values = []
-rmse_values = []
+mae_values = []
 for k in range(0,Num_Of_Models):
     tf.logging.info("Evaluation results of 1st MODEL")
     tf.logging.info(" ***** Evaluation results *****")
@@ -241,8 +241,8 @@ for k in range(0,Num_Of_Models):
     for key in evaluate_result:
         tf.logging.info("   {} ---> {}".format(key, evaluate_result[key]))
         Result_File.write("   {} ---> {}\n".format(key, evaluate_result[key]))
-        if str(key) == 'rmse' :
-            rmse_values.append(evaluate_result[key])
+        if str(key) == 'mae' :
+            mae_values.append(evaluate_result[key])
         if str(key) == 'loss' :
             loss_values.append(evaluate_result[key])
     tf.logging.info(" ******************************")
@@ -256,7 +256,7 @@ for k in range(0,Num_Of_Models):
 _, tmp_labels = models.my_input_fn(FILE_PRACTICE, repeat_count=1, batch_size=32, shuffle_count=1)
 with tf.Session() as sess:
     labels = sess.run(tmp_labels) #Extract Tensor to List
-    print(labels)
+    #print(labels)
 
 # Predict in the data in FILE_TEST, repeat only once.
 error_file_total_model = []
@@ -399,9 +399,9 @@ print()
 Result_File.write("\n")
 
 for j in range(0, Num_Of_Models):
-    print("Model #" + str(int(j + 1)) + " : rmse [" + "{0:0.5f}".format(rmse_values[j]) + "]" + " // loss [" + "{0:0.5f}".format(loss_values[j]) + "]")
-    Result_File.write("Model #" + str(int(j + 1)) + " : rmse [" + "{0:0.5f}".format(rmse_values[j]) + "]" + " // loss [" + "{0:0.5f}".format(loss_values[j]) + "]\n")
-    tot_rmse = tot_rmse + rmse_values[j]
+    print("Model #" + str(int(j + 1)) + " : mae [" + "{0:0.5f}".format(mae_values[j]) + "]" + " // loss [" + "{0:0.5f}".format(loss_values[j]) + "]")
+    Result_File.write("Model #" + str(int(j + 1)) + " : mae [" + "{0:0.5f}".format(mae_values[j]) + "]" + " // loss [" + "{0:0.5f}".format(loss_values[j]) + "]\n")
+    tot_rmse = tot_rmse + mae_values[j]
     tot_loss = tot_loss + loss_values[j]
 
 
@@ -453,19 +453,7 @@ Result_File.close()
 #=======================================================================================================================
 
 '''
-# Prediction from file and Compare with Label - CSH made...It Works
-_, tmp_labels = models.my_input_fn(FILE_PRACTICE, 1)
-with tf.Session() as sess:
-    labels = sess.run(tmp_labels)
-file_predictions = classifier_list[0].predict(input_fn=lambda: models.my_input_fn(FILE_TEST, 1))
-
-for pred_dict, expec in zip(file_predictions, labels):
-    result_value = pred_dict['Squeeze']
-    print("Prediction : {0:0.2f} / Expected {1:0.2f}".format(pred_dict['Squeeze'],expec))
-'''
-
-
-''' It is not work for Estimator
+# It is not work for Estimator
 #=======================================================================================================================
 #=======================================================================================================================
 #=======================================================================================================================
@@ -481,8 +469,8 @@ Tmp_Predictions = models.my_model_fn(tmp_features,tmp_labels,tf.estimator.ModeKe
                                                   }).predictions
 saver = tf.train.Saver()
 with tf.Session() as sess:
-    ckpt = tf.train.get_checkpoint_state('./model_1/model.ckpt-6522.data-00000-of-00001')
-    saver.restore(sess, './model_1') #ckpt.model_checkpoint_path)
+    ckpt = tf.train.get_checkpoint_state('./model_1\model.ckpt')
+    saver.restore(sess, './model_1\model.ckpt') #ckpt.model_checkpoint_path)
 
     tmp_prediction_values = []
     tmp_label_values = []
@@ -495,8 +483,7 @@ with tf.Session() as sess:
             break
     print(tmp_prediction_values)
     print(tmp_label_values)
-
-#=======================================================================================================================
-#=======================================================================================================================
-#=======================================================================================================================
 '''
+#=======================================================================================================================
+#=======================================================================================================================
+#=======================================================================================================================
