@@ -250,25 +250,70 @@ for k in range(0,Num_Of_Models):
     Result_File.write("*********************************\n")
 
 ##################################################### Prediction #######################################################
+
+# Prediction from file and Compare with Label - CSH made
+#tmp_features, tmp_labels = models.my_input_fn(FILE_PRACTICE, 1)
+_, tmp_labels = models.my_input_fn(FILE_PRACTICE, repeat_count=1, batch_size=32, shuffle_count=1)
+with tf.Session() as sess:
+    labels = sess.run(tmp_labels) #Extract Tensor to List
+    print(labels)
+
 # Predict in the data in FILE_TEST, repeat only once.
+error_file_total_model = []
+tf.logging.info(" ***** Prediction on test file ***** ")
+Result_File.write("\n ***** Prediction on test file ***** \n")
+
+total_file_predictions = []
+error_for_each_model = []
 for k in range(0,Num_Of_Models):
-    tf.logging.info(" ***** Prediction on test file ***** ")
     tf.logging.info(" *****        {}st MODEL        ***** ".format(str(k + 1)))
-    Result_File.write("\n ***** Prediction on test file ***** \n")
     Result_File.write(" *****        {}st MODEL        ***** \n".format(str(k + 1)))
-    predict_results = classifier_list[k].predict(input_fn=lambda: models.my_input_fn(FILE_PRACTICE, 1))
+    predict_results = classifier_list[k].predict(input_fn=lambda:models.my_input_fn(FILE_PRACTICE, repeat_count=1, batch_size=32, shuffle_count=1))
     i = 1
-    for prediction in predict_results:
-        prediction_print = "{0:d}\t{1}\t{2:0.1f}\t{3:0.1f}\t{4:0.1f}\t{5:0.1f}\t{6:0.1f}\t{7:0.1f}\t{8:0.1f}\t{9:0.1f}\t{10:0.1f}\t{11:0.1f}\t{12:0.1f}\t{13:0.1f}\t{15}{14:0.2f}".format(
+    error_file = []
+    error_file_sum = 0.0
+    temp_predict = []
+    for prediction, expec in zip(predict_results, labels):
+        error_file.append((abs(prediction["Squeeze"] - expec)/expec) * 100)
+        prediction_print = "{0:d}\t{1}\t{2:0.1f}\t{3:0.1f}\t{4:0.1f}\t{5:0.1f}\t{6:0.1f}\t{7:0.1f}\t{8:0.1f}\t{9:0.1f}\t{10:0.1f}\t{11:0.1f}\t{12:0.1f}\t{13:0.1f}\t{15}{14:0.2f}\t{16}{17:0.2f}\t{18:0.2f}%".format(
                 i,
                 prediction["vehicle_type"].decode('utf-8').ljust(5).upper(),
                 prediction["MP01"], prediction["MP02"], prediction["MP03"], prediction["MP04"], prediction["MP05"],
                 prediction["MP06"], prediction["MP07"], prediction["MP08"], prediction["MP09"], prediction["MP10"],
                 prediction["MP11"], prediction["MP12"],
-                prediction["Squeeze"], " Index ---> ")
+                prediction["Squeeze"], "Predict : ", "Expected : ", expec, (abs(prediction["Squeeze"] - expec)/expec) * 100)
         print(prediction_print)
         Result_File.write(prediction_print + "\n")
+        temp_predict.append(prediction["Squeeze"])
         i = i + 1
+    total_file_predictions.append(temp_predict)
+    print("Model #{0} Average Error on File Inputs : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)))
+    Result_File.write("\nModel #{0} Average Error on File Inputs : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)) + "\n\n")
+    error_for_each_model.append(sum(error_file)/len(error_file))
+
+# For Total Models
+average_prediction_file = []
+average_err_file = []
+for j in range(0, len(temp_predict)):
+    temp_prediction = 0.0
+    for k in range(0, Num_Of_Models):
+        temp_prediction = temp_prediction + total_file_predictions[k][j]
+    average_prediction_file.append(temp_prediction / float(Num_Of_Models))
+    average_err_file.append((abs((temp_prediction / float(Num_Of_Models)) - labels[j]) / labels[j]) * 100)
+
+Result_File.write("\n")
+print("")
+
+for z in range(0,len(error_for_each_model)):
+    Result_File.write("Model #{0} Error : {1:0.2f}%\n".format(str(z+1), error_for_each_model[z]))
+    print("Model #{0} Error : {1:0.2f}%".format(str(z+1), error_for_each_model[z]))
+
+print("***********************************")
+print("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%".format(sum(average_err_file) / len(average_err_file)))
+print("***********************************")
+Result_File.write("\n************************************\n")
+Result_File.write("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%\n".format(sum(average_err_file) / len(average_err_file)))
+Result_File.write("\n************************************\n")
 
 
 tf.logging.info(" ***** Memory Base Predictions ***** ")
@@ -321,8 +366,8 @@ for k in range(0,Num_Of_Models):
 print("\n")
 Result_File.write("\n\n")
 for k in range(0,Num_Of_Models):
-    print("#{2:d}{0}\t{1:0.2f}%".format(" Model Average Error : ", error_total_model[k], k))
-    Result_File.write("#{2:d}{0}\t{1:0.2f}%\n".format(" Model Average Error : ", error_total_model[k], k))
+    print("#{2:d}{0}\t{1:0.2f}%".format(" Model Average Error on Memory : ", error_total_model[k], k))
+    Result_File.write("#{2:d}{0}\t{1:0.2f}%\n".format(" Model Average Error on Memory : ", error_total_model[k], k))
 
 #Calculate Average Prediction
 average_prediction = []
@@ -391,3 +436,67 @@ Result_File.write("***************************************************\n")
 Result_File.write("\n ******************************************************** Total End of Job ******************************************************** \n\n")
 
 Result_File.close()
+
+#=======================================================================================================================
+#=======================================================================================================================
+#=======================================================================================================================
+
+# To Display Tensor
+#print(FILE_PRACTICE)
+#tmp_features, tmp_labels = models.my_input_fn(FILE_PRACTICE, 1)
+#with tf.Session() as sess:
+#    #print(sess.run(tmp_features))
+#    print(sess.run(tmp_labels))
+
+#=======================================================================================================================
+#=======================================================================================================================
+#=======================================================================================================================
+
+'''
+# Prediction from file and Compare with Label - CSH made...It Works
+_, tmp_labels = models.my_input_fn(FILE_PRACTICE, 1)
+with tf.Session() as sess:
+    labels = sess.run(tmp_labels)
+file_predictions = classifier_list[0].predict(input_fn=lambda: models.my_input_fn(FILE_TEST, 1))
+
+for pred_dict, expec in zip(file_predictions, labels):
+    result_value = pred_dict['Squeeze']
+    print("Prediction : {0:0.2f} / Expected {1:0.2f}".format(pred_dict['Squeeze'],expec))
+'''
+
+
+''' It is not work for Estimator
+#=======================================================================================================================
+#=======================================================================================================================
+#=======================================================================================================================
+
+tmp_features, tmp_labels = models.my_input_fn(FILE_PRACTICE, 1)
+
+#Rebuild Models
+Tmp_Predictions = models.my_model_fn(tmp_features,tmp_labels,tf.estimator.ModeKeys.EVAL,params=
+                                                  {
+                                                      "feature_columns": models.feature_columns,
+                                                      "model_identifier": str(1), #str(k),
+                                                      "train_logging" : args.chkpt
+                                                  }).predictions
+saver = tf.train.Saver()
+with tf.Session() as sess:
+    ckpt = tf.train.get_checkpoint_state('./model_1/model.ckpt-6522.data-00000-of-00001')
+    saver.restore(sess, './model_1') #ckpt.model_checkpoint_path)
+
+    tmp_prediction_values = []
+    tmp_label_values = []
+    while True:
+        try:
+            preds, lbls = sess.run([Tmp_Predictions, tmp_labels])
+            tmp_prediction_values += preds
+            tmp_label_values += lbls
+        except tf.errors.OutOfRangeError:
+            break
+    print(tmp_prediction_values)
+    print(tmp_label_values)
+
+#=======================================================================================================================
+#=======================================================================================================================
+#=======================================================================================================================
+'''

@@ -39,7 +39,26 @@ def my_input_fn(file_path, repeat_count=1, shuffle_count=1, batch_size = 32):
         )
         iterator = dataset.make_one_shot_iterator()
         batch_features, batch_labels = iterator.get_next()
-    return batch_features, batch_labels
+
+        '''
+        # Display batch_features / batch_labels
+        with tf.Session() as sess:
+            tmp_features = sess.run(batch_features)
+            tmp_labels = sess.run(batch_labels)
+            #for key, expec in zip(tmp_features, tmp_labels):
+            #    tmp_string = ''
+            #    for i in range(0,len(tmp_features[key])):
+            #        tmp_string = tmp_string + str("{0}\t".format(tmp_features[key][i]))
+            #    print("{} .....>>> {}".format(key, tmp_string))
+            #print(tmp_labels)
+            for i in range(0,batch_size):
+                tmp_string = ''
+                for key in sorted(tmp_features):
+                    tmp_string = tmp_string + str("{0}\t".format(tmp_features[key][i]))
+                print(str(tmp_labels[i]) + '\t' + tmp_string)
+        '''
+
+    return batch_features, batch_labels #batch_features, batch_labels
 
 def memory_input(features, labels, batch_size=1):
     features = dict(features)
@@ -122,7 +141,7 @@ def my_model_fn(
                    'MP10': features['Mp10'],
                    'MP11': features['Mp11'],
                    'MP12': features['Mp12'],
-                   'vehicle_type': features['vehicle']
+                   'vehicle_type': features['vehicle'],
                    }
 
     ################################################ 1. Prediction mode ################################################

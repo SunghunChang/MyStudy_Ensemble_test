@@ -8,8 +8,8 @@ import time
 
 day = time.localtime()
 day_string = "%04d-%02d-%02d_%02d-%02d-%02d" % (day.tm_year, day.tm_mon, day.tm_mday, day.tm_hour, day.tm_min, day.tm_sec)
-vmin_val = -0.6
-vmax_val = 0.6
+vmin_val = -1.0
+vmax_val = 1.0
 
 def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1, bias_layer_2, bias_layer_3, k, plot_show):
 	#plt.figure(figsize=(8.0, 5.0))
@@ -18,7 +18,7 @@ def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1,
 	ax1.set_title('1st Layer Weight [Model #{0:s}]'.format(str(k + 1)))
 	#Here vmin and vmax is work main matrix and colorbar both
 
-	im1 = ax1.imshow(weight_layer_1, vmin=vmin_val, vmax=vmax_val, cmap='gray') # cm.coolwarm)  # , aspect='auto') # interpolation='nearest'
+	im1 = ax1.imshow(weight_layer_1, vmin=vmin_val, vmax=vmax_val, cmap=cm.coolwarm) #'gray cm.coolwarm)  # , aspect='auto') # interpolation='nearest'
 	divider1 = make_axes_locatable(ax1)
 	cax1 = divider1.append_axes("right", size="5%", pad=0.05)
 	# Multiple locator of colorbar : even spacing
@@ -30,13 +30,13 @@ def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1,
 
 
 	ax2.set_title('2st Layer Weight [Model #{0:s}]'.format(str(k + 1)))
-	im2 = ax2.imshow(weight_layer_2, vmin=vmin_val, vmax=vmax_val, cmap='gray', aspect='auto')
+	im2 = ax2.imshow(weight_layer_2, vmin=vmin_val, vmax=vmax_val, cmap=cm.coolwarm, aspect='auto')
 	divider2 = make_axes_locatable(ax2)
 	cax2 = divider2.append_axes("right", size="5%", pad=0.05)
 	cbar2 = plt.colorbar(im2, cax=cax2, ticks=MultipleLocator(0.2), format="%.1f")
 
 	ax3.set_title('3rd Layer Weight [Model #{0:s}]'.format(str(k + 1)))
-	im3 = ax3.imshow(weight_layer_3, vmin=vmin_val, vmax=vmax_val, cmap='gray', aspect='auto')
+	im3 = ax3.imshow(weight_layer_3, vmin=vmin_val, vmax=vmax_val, cmap=cm.coolwarm, aspect='auto')
 	divider3 = make_axes_locatable(ax3)
 	cax3 = divider3.append_axes("right", size="5%", pad=0.05)
 	cbar3 = plt.colorbar(im3, cax=cax3, ticks=MultipleLocator(0.2), format="%.1f")
