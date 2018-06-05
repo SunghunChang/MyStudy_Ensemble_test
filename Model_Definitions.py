@@ -171,20 +171,21 @@ def my_model_fn(
         bias_value_1 = tf.get_variable("First_Hidden_Layer/bias")
         bias_value_2 = tf.get_variable("Second_Hidden_Layer/bias")
         bias_value_3 = tf.get_variable("Third_Hidden_Layer/bias")
-        with tf.name_scope('my_summary'):
+        with tf.name_scope('my_summary_layers'):
             tf.summary.histogram('weight_layer_1', weight_value_1)
             tf.summary.histogram('weight_layer_2', weight_value_2)
             tf.summary.histogram('weight_layer_3', weight_value_3)
             tf.summary.histogram('bias_layer_1', bias_value_1)
             tf.summary.histogram('bias_layer_2', bias_value_2)
             tf.summary.histogram('bias_layer_3', bias_value_3)
+            tf.summary.histogram('First_Layer_Activation', h1)
+            tf.summary.histogram('Second_Layer_Activation', h2)
+            tf.summary.histogram('Third_Layer_Activation', h3)
     with tf.name_scope('my_summary'):
-        tf.summary.histogram('batch_size', batch_size)
+        #tf.summary.histogram('batch_size', batch_size)
+        tf.summary.scalar('batch_size', batch_size)
         tf.summary.histogram('average_loss', average_loss)
         tf.summary.histogram('total_loss', total_loss)
-        tf.summary.histogram('First_Layer_Activation', h1)
-        tf.summary.histogram('Second_Layer_Activation', h2)
-        tf.summary.histogram('Third_Layer_Activation', h3)
 
     ################################################# 2. Training mode #################################################
     logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,
@@ -233,17 +234,22 @@ def my_model_fn(
         # 아래 Label등은 숫자 하나가 아니라 배치가 다 들어온 것인가보다...
         rmse = tf.metrics.root_mean_squared_error(labels, predictions['Squeeze'])
         mae = tf.metrics.mean_absolute_error(labels, predictions['Squeeze'])
+        #mre = tf.metrics.mean_relative_error(labels, predictions['Squeeze'])
+        mse = tf.metrics.mean_squared_error(labels, predictions['Squeeze'])
+
         #accuracy = tf.metrics.recall(labels, predictions['Squeeze'])
 
         # Add the rmse to the collection of evaluation metrics.
-        eval_metrics = {"rmse": rmse, "mae": mae}
+        eval_metrics = {"rmse": rmse, "mae": mae, "mse": mse}
 
     # Set the TensorBoard scalar my_accuracy to the accuracy
      # Obs: This function only sets the value during mode == ModeKeys.TRAIN
     # To set values during evaluation, see eval_metrics_ops
 
-    #    tf.summary.scalar('my_accuracy', mae)
-        tf.summary.scalar('mae', tf.metrics.mean_absolute_error(labels, predictions['Squeeze'])) # predictions['Squeeze']-labels)
+    with tf.name_scope('Errors'):
+        tf.summary.scalar('Root_Mean_Squared_Error', rmse)
+        tf.summary.scalar('Mean_Squared_Error', mse)
+        tf.summary.scalar('Mean_Absolute_Error', mae) # predictions['Squeeze']-labels)
 
     ################################################ 3. Evaluation mode ################################################
     # Return our loss (which is used to evaluate our model)
