@@ -18,6 +18,8 @@ import six.moves.urllib.request as request
 import logging
 import logging.handlers
 import time
+import numpy as np
+
 now = time.localtime()
 now_string = "%04d-%02d-%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec)
 
@@ -222,7 +224,8 @@ for k in range(0, Num_Of_Models):
     bias_layer_3 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/Third_Hidden_Layer/bias')
 
     varplots.PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1, bias_layer_2, bias_layer_3, k, args.wbplot)
-
+    #with tf.name_scope('temp'):
+    #    tf.summary.scalar('Weight_Mean', np.mean(weight_layer_1))
     os.system('cls')
 
 ##################################################### Evaluation #######################################################

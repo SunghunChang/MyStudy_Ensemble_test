@@ -5,7 +5,7 @@
 ########################################
 
 import tensorflow as tf
-
+import numpy as np
 
 # Create features
 feature_names = ['vehicle', 'Mp01', 'Mp02', 'Mp03', 'Mp04', 'Mp05', 'Mp06', 'Mp07', 'Mp08', 'Mp09', 'Mp10', 'Mp11', 'Mp12']
@@ -14,6 +14,14 @@ vehicle = tf.feature_column.categorical_column_with_vocabulary_list('vehicle', [
 feature_columns = [tf.feature_column.indicator_column(vehicle)]
 for k in range(1,13):
     feature_columns.append(tf.feature_column.numeric_column(feature_names[k]))
+
+def reduce_var(x, axis=None, keepdims=False):
+    m = tf.reduce_mean(x,axis=axis, keep_dims=True)
+    devs_squared = tf.square(x-m)
+    return tf.reduce_mean(devs_squared, axis=axis, keep_dims=keepdims)
+
+def reduce_std(x, axis=None, keepdims=False):
+    return tf.sqrt(reduce_var(x, axis=axis, keepdims=keepdims))
 
 # Create an input function reading a file using the Dataset API
 # Then provide the results to the Estimator API
@@ -77,6 +85,10 @@ def my_model_fn(
     labels,   # This is batch_labels from input_fn
     mode,
     params):    # And instance of tf.estimator.ModeKeys, see below
+
+    #init = tf.global_variables_initializer()
+    #sess = tf.InteractiveSession()
+    #sess.run(init)
 
     if mode == tf.estimator.ModeKeys.PREDICT:
         #tf.logging.info("***************** MODEL FUNCTION MODE : PREDICT, {}".format(mode))
@@ -164,13 +176,13 @@ def my_model_fn(
     batch_size = tf.shape(labels)[0]
     total_loss = tf.to_float(batch_size) * average_loss
 
-    with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers', reuse=True):
-        weight_value_1 = tf.get_variable("First_Hidden_Layer/kernel")
-        weight_value_2 = tf.get_variable("Second_Hidden_Layer/kernel")
-        weight_value_3 = tf.get_variable("Third_Hidden_Layer/kernel")
-        bias_value_1 = tf.get_variable("First_Hidden_Layer/bias")
-        bias_value_2 = tf.get_variable("Second_Hidden_Layer/bias")
-        bias_value_3 = tf.get_variable("Third_Hidden_Layer/bias")
+    with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers', reuse=tf.AUTO_REUSE):
+        weight_value_1 = tf.get_variable("First_Hidden_Layer/kernel")  # (15,30)
+        weight_value_2 = tf.get_variable("Second_Hidden_Layer/kernel") # 30,30
+        weight_value_3 = tf.get_variable("Third_Hidden_Layer/kernel") # 30,30
+        bias_value_1 = tf.get_variable("First_Hidden_Layer/bias")  # (30,)
+        bias_value_2 = tf.get_variable("Second_Hidden_Layer/bias") # (30,)
+        bias_value_3 = tf.get_variable("Third_Hidden_Layer/bias")  # (30,)
         with tf.name_scope('my_summary_layers'):
             tf.summary.histogram('weight_layer_1', weight_value_1)
             tf.summary.histogram('weight_layer_2', weight_value_2)
@@ -181,11 +193,26 @@ def my_model_fn(
             tf.summary.histogram('First_Layer_Activation', h1)
             tf.summary.histogram('Second_Layer_Activation', h2)
             tf.summary.histogram('Third_Layer_Activation', h3)
+        with tf.name_scope('layers_1'):
+            tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_1,[1,-1])))
+            tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_1,[1,-1])))
+            tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_1,[1,-1])))
+            tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_1,[1,-1])))
+        with tf.name_scope('layers_2'):
+            tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_2,[1,-1])))
+            tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_2,[1,-1])))
+            tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_2,[1,-1])))
+            tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_2,[1,-1])))
+        with tf.name_scope('layers_3'):
+            tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_3,[1,-1])))
+            tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_3,[1,-1])))
+            tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_3,[1,-1])))
+            tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_3,[1,-1])))
     with tf.name_scope('my_summary'):
-        #tf.summary.histogram('batch_size', batch_size)
         tf.summary.scalar('batch_size', batch_size)
         tf.summary.histogram('average_loss', average_loss)
         tf.summary.histogram('total_loss', total_loss)
+
 
     ################################################# 2. Training mode #################################################
     logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,
@@ -206,17 +233,15 @@ def my_model_fn(
                 #optimizer = tf.train.AdamOptimizer(0.001, name="My_Optimizer")
                 train_op = tf.train.AdamOptimizer(0.001, name="My_Optimizer").minimize(loss=average_loss, global_step=tf.train.get_global_step())
 
-        ''' 내부 변수 출력 예제
+        # 내부 변수 출력 예제
         # Trainable 변수 이름과 Shape 출력  - 되긴함 : 별도 로그파일로 출력??
         # trainable_variables / all_variables
-        variables_names = [v.name for v in tf.all_variables()]
-        values = [v for v in tf.all_variables()] #variables_names.eval()
-        for k, v in zip(variables_names, values):
-            print("Name : ", k, " / shape : ", v.shape)
-            #print("value : ", tf.get_variable('Model_1_Layers/First_Hidden_Layer/kernel')) 이건 안됨
-        '''
+        # variables_names = [v.name for v in tf.all_variables()]
+        # values = [v for v in tf.all_variables()] #variables_names.eval()
+        # for k, v in zip(variables_names, values):
+        #    print("Name : ", k, " / shape : ", v.shape)
+        #    print("value : ", tf.get_variable('Model_1_Layers/First_Hidden_Layer/kernel')) 이건 안됨
 
-        # Return training operations: loss and train_op
         return tf.estimator.EstimatorSpec(
             mode,
             # loss=total_loss,
