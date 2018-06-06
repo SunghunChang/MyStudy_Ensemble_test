@@ -92,16 +92,17 @@ def my_model_fn(
 
     if mode == tf.estimator.ModeKeys.PREDICT:
         #tf.logging.info("***************** MODEL FUNCTION MODE : PREDICT, {}".format(mode))
-        print("***************** MODEL #{0:s} ESTIMATOR MODE : PREDICT, {1:s}".format(params["model_identifier"], mode))
+        print("***************** MODEL #{0:s} Estimator MODE : PREDICT, {1:s}".format(params["model_identifier"], mode))
     elif mode == tf.estimator.ModeKeys.EVAL:
         #tf.logging.info("***************** MODEL FUNCTION MODE : EVAL, {}".format(mode))
-        print("***************** MODEL #{0:s} ESTIMATOR MODE : EVAL, {1:s}".format(params["model_identifier"], mode))
+        print("***************** MODEL #{0:s} Estimator MODE : EVAL, {1:s}".format(params["model_identifier"], mode))
     elif mode == tf.estimator.ModeKeys.TRAIN:
         #tf.logging.info("***************** MODEL FUNCTION MODE : TRAIN, {}".format(mode))
-        print("***************** MODEL #{0:s} ESTIMATOR MODE : TRAIN, {1:s}".format(params["model_identifier"], mode))
+        print("***************** MODEL #{0:s} Estimator MODE : TRAIN, {1:s}".format(params["model_identifier"], mode))
 
     #with tf.name_scope('Layers'):
-    with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers'):
+    #with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers'):
+    with tf.variable_scope('Model_Layer_Informations'):
         regularizer = tf.keras.regularizers.l2(l=0.01)
         initializer = tf.keras.initializers.glorot_normal(seed=None)
         input_layer = tf.feature_column.input_layer(features, params["feature_columns"])
@@ -176,7 +177,8 @@ def my_model_fn(
     batch_size = tf.shape(labels)[0]
     total_loss = tf.to_float(batch_size) * average_loss
 
-    with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers', reuse=tf.AUTO_REUSE):
+    #with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers', reuse=tf.AUTO_REUSE):
+    with tf.variable_scope('Model_Layer_Informations', reuse=tf.AUTO_REUSE):
         weight_value_1 = tf.get_variable("First_Hidden_Layer/kernel")  # (15,30)
         weight_value_2 = tf.get_variable("Second_Hidden_Layer/kernel") # 30,30
         weight_value_3 = tf.get_variable("Third_Hidden_Layer/kernel") # 30,30
@@ -217,7 +219,10 @@ def my_model_fn(
     ################################################# 2. Training mode #################################################
     logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,
                                                "_total_loss":total_loss,
-                                               "_batch_size":batch_size},
+                                               "_batch_size":batch_size,
+                                               "_weight_std_1":reduce_std(tf.reshape(weight_value_1,[1,-1])),
+                                               "_weight_std_2":reduce_std(tf.reshape(weight_value_2,[1,-1])),
+                                               "_weight_std_3":reduce_std(tf.reshape(weight_value_3,[1,-1]))},
                                                #"output_layer":output_layer},  # It works but too many number.
                                                #"_predictions":predictions['Squeeze']}, # It works but too many number. ex>32
                                                every_n_iter=params["train_logging"])

@@ -214,6 +214,7 @@ for k in range(1, Num_Of_Models + 1):
 
 # Display Weight and Bias [After training is done]
 for k in range(0, Num_Of_Models):
+    '''
     weight_layer_1 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/First_Hidden_Layer/kernel')
     bias_layer_1 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/First_Hidden_Layer/bias')
 
@@ -222,10 +223,17 @@ for k in range(0, Num_Of_Models):
 
     weight_layer_3 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/Third_Hidden_Layer/kernel')
     bias_layer_3 = classifier_list[k].get_variable_value('Model_' + str(k + 1) + '_Layers/Third_Hidden_Layer/bias')
+    '''
+    weight_layer_1 = classifier_list[k].get_variable_value('Model_Layer_Informations/First_Hidden_Layer/kernel')
+    bias_layer_1 = classifier_list[k].get_variable_value('Model_Layer_Informations/First_Hidden_Layer/bias')
 
+    weight_layer_2 = classifier_list[k].get_variable_value('Model_Layer_Informations/Second_Hidden_Layer/kernel')
+    bias_layer_2 = classifier_list[k].get_variable_value('Model_Layer_Informations/Second_Hidden_Layer/bias')
+
+    weight_layer_3 = classifier_list[k].get_variable_value('Model_Layer_Informations/Third_Hidden_Layer/kernel')
+    bias_layer_3 = classifier_list[k].get_variable_value('Model_Layer_Informations/Third_Hidden_Layer/bias')
     varplots.PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1, bias_layer_2, bias_layer_3, k, args.wbplot)
-    #with tf.name_scope('temp'):
-    #    tf.summary.scalar('Weight_Mean', np.mean(weight_layer_1))
+
     os.system('cls')
 
 ##################################################### Evaluation #######################################################
