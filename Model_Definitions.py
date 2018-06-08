@@ -4,6 +4,16 @@
 ##                                    ##
 ########################################
 
+# Use Adam-Optimizer
+# - Learning Rate : 0.001
+# - Training and Evaluation Loss -> Average Loss를 사용함
+#                                 [mean squared error between labels and predictions]
+# - Total Loss = Average Error * Batch Size
+#
+# 3-Hidden Layers with 30 unit nodes
+#
+# Activation is RELU function
+
 import tensorflow as tf
 import numpy as np
 
@@ -105,6 +115,8 @@ def my_model_fn(
     with tf.variable_scope('Model_Layer_Informations'):
         regularizer = tf.keras.regularizers.l2(l=0.01)
         initializer = tf.keras.initializers.glorot_normal(seed=None)
+        #regularizer = None
+        #initializer = None
         input_layer = tf.feature_column.input_layer(features, params["feature_columns"])
         # h1 = tf.layers.dense(input_layer, units=30)
         h1 = tf.layers.Dense(units=30,
@@ -177,6 +189,8 @@ def my_model_fn(
     batch_size = tf.shape(labels)[0]
     total_loss = tf.to_float(batch_size) * average_loss
 
+    rmse = tf.sqrt(tf.reduce_mean(tf.squared_difference(labels, predictions['Squeeze'])))
+
     #with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers', reuse=tf.AUTO_REUSE):
     with tf.variable_scope('Model_Layer_Informations', reuse=tf.AUTO_REUSE):
         weight_value_1 = tf.get_variable("First_Hidden_Layer/kernel")  # (15,30)
@@ -195,29 +209,40 @@ def my_model_fn(
             tf.summary.histogram('First_Layer_Activation', h1)
             tf.summary.histogram('Second_Layer_Activation', h2)
             tf.summary.histogram('Third_Layer_Activation', h3)
+        # 아래처럼 해도 Tree처럼 되지는 않음. Filter Tag를 편하게 쓸 수 있어서 좋긴 함
         with tf.name_scope('layers_1'):
-            tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_1,[1,-1])))
-            tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_1,[1,-1])))
-            tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_1,[1,-1])))
-            tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_1,[1,-1])))
+            with tf.name_scope('std'):
+                tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_1, [1, -1])))
+                tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_1, [1, -1])))
+            with tf.name_scope('mean'):
+                tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_1, [1, -1])))
+                tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_1,[1,-1])))
         with tf.name_scope('layers_2'):
-            tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_2,[1,-1])))
-            tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_2,[1,-1])))
-            tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_2,[1,-1])))
-            tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_2,[1,-1])))
+            with tf.name_scope('std'):
+                tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_2,[1,-1])))
+                tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_2, [1, -1])))
+            with tf.name_scope('mean'):
+                tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_2, [1, -1])))
+                tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_2,[1,-1])))
         with tf.name_scope('layers_3'):
-            tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_3,[1,-1])))
-            tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_3,[1,-1])))
-            tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_3,[1,-1])))
-            tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_3,[1,-1])))
-    with tf.name_scope('my_summary'):
+            with tf.name_scope('std'):
+                tf.summary.scalar('Weight_Std', reduce_std(tf.reshape(weight_value_3,[1,-1])))
+                tf.summary.scalar('Bias_Std', reduce_std(tf.reshape(bias_value_3, [1, -1])))
+            with tf.name_scope('mean'):
+                tf.summary.scalar('Weight_Mean', tf.reduce_mean(tf.reshape(weight_value_3, [1, -1])))
+                tf.summary.scalar('Bias_Mean', tf.reduce_mean(tf.reshape(bias_value_3,[1,-1])))
+    with tf.name_scope('my_summary_training'):
         tf.summary.scalar('batch_size', batch_size)
-        tf.summary.histogram('average_loss', average_loss)
-        tf.summary.histogram('total_loss', total_loss)
+        tf.summary.scalar('Total_Loss', total_loss)
+        tf.summary.scalar('Mean_Squared_Error_aver.loss', average_loss)
+        tf.summary.scalar('Root_Mean_Squared_Error', rmse)
+        #tf.summary.scalar('Mean_Absolute_Error', mae)
+        tf.summary.histogram('Mean_Squared_Error_aver.loss', average_loss)
+        tf.summary.histogram('Total_Loss_aver.loss*batch_size', total_loss)
 
 
     ################################################# 2. Training mode #################################################
-    logging_hook = tf.train.LoggingTensorHook({"_average_loss":average_loss,
+    logging_hook = tf.train.LoggingTensorHook({"_average_loss[mse]":average_loss,
                                                "_total_loss":total_loss,
                                                "_batch_size":batch_size,
                                                "_weight_std_1":reduce_std(tf.reshape(weight_value_1,[1,-1])),
@@ -238,14 +263,27 @@ def my_model_fn(
                 #optimizer = tf.train.AdamOptimizer(0.001, name="My_Optimizer")
                 train_op = tf.train.AdamOptimizer(0.001, name="My_Optimizer").minimize(loss=average_loss, global_step=tf.train.get_global_step())
 
-        # 내부 변수 출력 예제
-        # Trainable 변수 이름과 Shape 출력  - 되긴함 : 별도 로그파일로 출력??
+
+        # 내부 변수 출력 #################################################################################################
+        # Trainable 변수 이름과 Shape 출력  - 되긴함 : 별도 로그파일로 출력
         # trainable_variables / all_variables
-        # variables_names = [v.name for v in tf.all_variables()]
-        # values = [v for v in tf.all_variables()] #variables_names.eval()
-        # for k, v in zip(variables_names, values):
-        #    print("Name : ", k, " / shape : ", v.shape)
+        Variable_File = open(params["log_dir"] + "/02_Training_Graph_Variables.log", 'w')
+        variables_names = [v.name for v in tf.all_variables()]
+        values = [v for v in tf.all_variables()] #variables_names.eval()
+        Variable_File.writelines("Write ALL Variables in Train Graph [tf.all_variables()]\n")
+        for k, v in zip(variables_names, values):
+            #print("Name : ", k, " / shape : ", v.shape) #이건 잘됨
+            Variable_File.writelines("* Name : " + k + " ------> " + str(v.shape) + '\n')
         #    print("value : ", tf.get_variable('Model_1_Layers/First_Hidden_Layer/kernel')) 이건 안됨
+        Variable_File.close()
+        # 내부 변수 출력 #################################################################################################
+
+        # Operation 출력 ################################################################################################
+        Op_File = open(params["log_dir"] + "/03_Training_Graph_Operations.log", 'w')
+        Op_File.writelines("Write ALL Operations in Train Graph\n")
+        for op in tf.get_default_graph().get_operations(): Op_File.writelines(str(op.name) + '\n')
+        Op_File.close()
+        # Operation 출력 ################################################################################################
 
         return tf.estimator.EstimatorSpec(
             mode,
@@ -258,8 +296,9 @@ def my_model_fn(
     # If mode is not PREDICT nor TRAIN, then we must be in EVAL
     assert mode == tf.estimator.ModeKeys.EVAL, "EVAL is only ModeKey left"
 
-    #with tf.name_scope('Eval_Scope'):
-    with tf.variable_scope('Eval_Scope'):
+
+    #with tf.variable_scope('Eval_Scope'):
+    with tf.name_scope('Eval_Scope'):
         # Calculate the accuracy between the true labels, and our predictions
         # 아래 Label등은 숫자 하나가 아니라 배치가 다 들어온 것인가보다...
         rmse = tf.metrics.root_mean_squared_error(labels, predictions['Squeeze'])
@@ -269,13 +308,14 @@ def my_model_fn(
 
         #accuracy = tf.metrics.recall(labels, predictions['Squeeze'])
 
-        # Add the rmse to the collection of evaluation metrics.
-        eval_metrics = {"rmse": rmse, "mae": mae, "mse": mse}
+    # Add the rmse to the collection of evaluation metrics.
+    eval_metrics = {"rmse": rmse, "mae": mae, "mse": mse}
 
     # Set the TensorBoard scalar my_accuracy to the accuracy
      # Obs: This function only sets the value during mode == ModeKeys.TRAIN
     # To set values during evaluation, see eval_metrics_ops
 
+    # 얘네는 왜 안나오나....
     with tf.name_scope('Errors'):
         tf.summary.scalar('Root_Mean_Squared_Error', rmse)
         tf.summary.scalar('Mean_Squared_Error', mse)
@@ -300,6 +340,13 @@ def my_model_fn(
         print("Write ALL Operations in Tensor Name")
         for n in tf.get_default_graph().as_graph_def().node: print(str(n.name))
         '''
+
+        # Operation 출력 ################################################################################################
+        Op_File = open(params["log_dir"] + "/04_Evaluation_Graph_Operations.log", 'w')
+        Op_File.writelines("Write ALL Operations in Eval Graph\n")
+        for op in tf.get_default_graph().get_operations(): Op_File.writelines(str(op.name) + '\n')
+        Op_File.close()
+        # Operation 출력 ###############################################################################################
 
         return tf.estimator.EstimatorSpec(
             mode,

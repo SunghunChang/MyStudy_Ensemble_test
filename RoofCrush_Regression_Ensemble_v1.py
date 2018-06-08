@@ -37,7 +37,7 @@ if not os.path.exists(eval_hook_dir):
 log = logging.getLogger('tensorflow')
 log.setLevel(logging.INFO)
 formatter = logging.Formatter('%(funcName)s - %(asctime)s - %(message)s')
-fh = logging.handlers.RotatingFileHandler('./00_Run_Logging/INFO_logging_CSH.log', maxBytes= 1024 * 1024 * 10, backupCount = 10) # 10MB - 10 files
+fh = logging.handlers.RotatingFileHandler('./00_Run_Logging/00_INFO_logging_CSH.log', maxBytes= 1024 * 1024 * 10, backupCount = 10) # 10MB - 10 files
 fh.setFormatter(formatter)
 log.addHandler(fh)
 '''
@@ -47,7 +47,7 @@ fh.setFormatter(formatter)
 log.addHandler(fh)
 '''
 
-Result_File = open(log_dir + "/Run_Results.log", 'a')
+Result_File = open(log_dir + "/01_Run_Results.log", 'a')
 
 def str2bool(v):
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
@@ -123,13 +123,21 @@ Result_File.write("        ** Default PATH : {}\n".format(PATH))
 Result_File.write("        ** TRAIN : {}\n".format(FILE_TRAIN))
 Result_File.write("        ** TEST : {}\n".format(FILE_TEST))
 Result_File.write("\n         -- Number of DNN Models     : {}\n".format(args.model))
+Result_File.write("                                         {}\n\n".format("-> 생성된 심층신경망 모델의 수"))
 Result_File.write("         -- Number of Train Epoch    : {}\n".format(args.epoch))
+Result_File.write("                                         {}\n\n".format("-> Training 데이터를 반복하는 횟수"))
 Result_File.write("         -- Train DATA Batch Size    : {}\n".format(args.batch))
+Result_File.write("                                         {}\n\n".format("-> 1 Step 당 읽어들이는 데이터 세트 "))
 Result_File.write("         -- Train DATA Shuffle Count : {}\n".format(args.shuffle))
+Result_File.write("                                         {}\n\n".format("-> 데이터 랜덤화 갯수 (1이면 하지않음)"))
 Result_File.write("         -- Check Point File Count   : {}\n".format(args.chkptnum))
+Result_File.write("                                         {}\n\n".format("-> 저장할 Check Point 파일수"))
 Result_File.write("         -- Check Point Saving / Custom Logging Every {} Steps\n".format(args.chkpt))
-Result_File.write("         -- Display Weight and Bias  : {}\n\n".format(args.wbplot))
-Result_File.write("\n")
+Result_File.write("                                         {}\n\n".format("-> Check Point 저장 간격 및 Logging 간격 (Step으로 지정)"))
+Result_File.write("         -- Display Weight and Bias  : {}\n".format(args.wbplot))
+Result_File.write("                                         {}\n".format("-> 신경망 Weight Map 및 Bias Map을 보여줌"))
+Result_File.write("                                         {}\n".format("-> False로 설정하더라도 별도 폴더에 저장됨 [./01_Run_Weight_n_Bias]"))
+Result_File.write("\n\n")
 
 # Create a custom estimator using my_model_fn
 tf.logging.info("Before classifier construction")
@@ -156,19 +164,20 @@ validation_monitor_list = []
 #run_config = tf.estimator.RunConfig().replace(session_config=tf.ConfigProto(device_count={'cpu': 0}))
 run_config = tf.estimator.RunConfig(session_config=tf.ConfigProto(device_count={'/GPU':0}),
                                     save_checkpoints_steps=args.chkpt,
-                                    save_summary_steps=1, # Its default is 100
+                                    save_summary_steps=10, # Its default is 100
                                     keep_checkpoint_max= args.chkptnum)
 for k in range(1, Num_Of_Models + 1):
     tf.logging.info("MODEL #" + str(k) + " CONSTRUCTION")
     classifier_list.append(tf.estimator.Estimator(model_fn=models.my_model_fn,
-                                                  model_dir="./model_" + str(k),
+                                                  model_dir="./model_" + str(k).rjust(3,'0'),
                                                   #config=tf.contrib.learn.RunConfig(save_checkpoints_steps=100),
                                                   config=run_config,
                                                   params=
                                                   {
                                                       "feature_columns": models.feature_columns,
-                                                      "model_identifier": str(k),
-                                                      "train_logging" : args.chkpt
+                                                      "model_identifier": str(k).rjust(3,'0'),
+                                                      "train_logging" : args.chkpt,
+                                                      "log_dir" : log_dir
                                                       # "batch" : args.batch
                                                   }
                                                   )
@@ -204,8 +213,8 @@ for k in range(1, Num_Of_Models + 1):
     #train_result_list.append(train_result)
     #tf.logging.info("TRAINING RESULT of MODEL #" + str(k))
     #tf.logging.info("{}".format(train_result))
-    tf.logging.info("END of MODEL #" + str(k) + " TRAINING")
-    Result_File.write("MODEL #" + str(k) + " TRAINING IS DONE NORMALLY\n")
+    tf.logging.info("END of MODEL #" + str(k).rjust(3,'0') + " TRAINING")
+    Result_File.write("MODEL #" + str(k).rjust(3,'0') + " TRAINING IS DONE NORMALLY\n")
 
 # below 3 lines are not work
 #    for trained in train_result:
@@ -233,14 +242,15 @@ for k in range(0, Num_Of_Models):
     weight_layer_3 = classifier_list[k].get_variable_value('Model_Layer_Informations/Third_Hidden_Layer/kernel')
     bias_layer_3 = classifier_list[k].get_variable_value('Model_Layer_Informations/Third_Hidden_Layer/bias')
     varplots.PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1, bias_layer_2, bias_layer_3, k, args.wbplot)
-
-    os.system('cls')
+    tf.logging.info("MODEL #" + str(k+1).rjust(3, '0') + " : Plot Image of Weight/Bias is saved....")
+    print("MODEL #" + str(k+1).rjust(3, '0') + " : Plot Image of Weight/Bias is saved....")
+    #os.system('cls')
 
 ##################################################### Evaluation #######################################################
 # Evaluate the model using the data contained in FILE_TEST
 # Return value will contain evaluation_metrics such as: loss & average_loss
 loss_values = []
-mae_values = []
+rmse_values = []
 for k in range(0,Num_Of_Models):
     tf.logging.info("Evaluation results of 1st MODEL")
     tf.logging.info(" ***** Evaluation results *****")
@@ -252,8 +262,8 @@ for k in range(0,Num_Of_Models):
     for key in evaluate_result:
         tf.logging.info("   {} ---> {}".format(key, evaluate_result[key]))
         Result_File.write("   {} ---> {}\n".format(key, evaluate_result[key]))
-        if str(key) == 'mae' :
-            mae_values.append(evaluate_result[key])
+        if str(key) == 'rmse' :
+            rmse_values.append(evaluate_result[key])
         if str(key) == 'loss' :
             loss_values.append(evaluate_result[key])
     tf.logging.info(" ******************************")
@@ -267,7 +277,6 @@ for k in range(0,Num_Of_Models):
 _, tmp_labels = models.my_input_fn(FILE_PRACTICE, repeat_count=1, batch_size=32, shuffle_count=1)
 with tf.Session() as sess:
     labels = sess.run(tmp_labels) #Extract Tensor to List
-    #print(labels)
 
 # Predict in the data in FILE_TEST, repeat only once.
 error_file_total_model = []
@@ -286,7 +295,7 @@ for k in range(0,Num_Of_Models):
     temp_predict = []
     for prediction, expec in zip(predict_results, labels):
         error_file.append((abs(prediction["Squeeze"] - expec)/expec) * 100)
-        prediction_print = "{0:d}\t{1}\t{2:0.1f}\t{3:0.1f}\t{4:0.1f}\t{5:0.1f}\t{6:0.1f}\t{7:0.1f}\t{8:0.1f}\t{9:0.1f}\t{10:0.1f}\t{11:0.1f}\t{12:0.1f}\t{13:0.1f}\t{15}{14:0.2f}\t{16}{17:0.2f}\t{18:0.2f}%".format(
+        prediction_print = "{0:02d}\t{1}\t{2:0.1f}\t{3:0.1f}\t{4:0.1f}\t{5:0.1f}\t{6:0.1f}\t{7:0.1f}\t{8:0.1f}\t{9:0.1f}\t{10:0.1f}\t{11:0.1f}\t{12:0.1f}\t{13:0.1f}\t{15}{14:0.2f}\t{16}{17:0.2f}\t{18:0.2f}%".format(
                 i,
                 prediction["vehicle_type"].decode('utf-8').ljust(5).upper(),
                 prediction["MP01"], prediction["MP02"], prediction["MP03"], prediction["MP04"], prediction["MP05"],
@@ -302,10 +311,10 @@ for k in range(0,Num_Of_Models):
     Result_File.write("\nModel #{0} Average Error on File Inputs : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)) + "\n\n")
     error_for_each_model.append(sum(error_file)/len(error_file))
 
-# For Total Models
+# For Total Models / 전체 모델에 대한 종합 결과
 average_prediction_file = []
 average_err_file = []
-for j in range(0, len(temp_predict)):
+for j in range(0, len(total_file_predictions[0])):
     temp_prediction = 0.0
     for k in range(0, Num_Of_Models):
         temp_prediction = temp_prediction + total_file_predictions[k][j]
@@ -315,17 +324,48 @@ for j in range(0, len(temp_predict)):
 Result_File.write("\n")
 print("")
 
+# 앙상블을 사용했을 경우 별도의 파일에 종합 결과만 따로 써줌 (파일이 커지므로)
+if Num_Of_Models > 1 == True :
+    Ensemble_Result_File = open(log_dir + "/01_Run_Results_Ensemble.log", 'a')
+    Ensemble_Result_File.write("\n")
+    Ensemble_Result_File.write("        ************************************************** \n")
+    Ensemble_Result_File.write("        *****      Prediction for BIW RoofCrush      ***** \n")
+    Ensemble_Result_File.write("        *****             SUNGHUN, CHANG             ***** \n")
+    Ensemble_Result_File.write("        *****       TensorFlow version : {}       ***** \n".format(tf_version))
+    Ensemble_Result_File.write("        *****            Ensemble Results            ***** \n")
+    Ensemble_Result_File.write("        ************************************************** \n")
+    Ensemble_Result_File.write("                  RUN DATE : {}\n".format(now_string))
+    Ensemble_Result_File.write("\n")
+
 for z in range(0,len(error_for_each_model)):
+    if Num_Of_Models > 1 == True:Ensemble_Result_File.write("Model #{0} Error : {1:0.2f}%\n".format(str(z+1), error_for_each_model[z]))
     Result_File.write("Model #{0} Error : {1:0.2f}%\n".format(str(z+1), error_for_each_model[z]))
     print("Model #{0} Error : {1:0.2f}%".format(str(z+1), error_for_each_model[z]))
 
 print("***********************************")
-print("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%".format(sum(average_err_file) / len(average_err_file)))
+print("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%".format(sum(average_err_file) / len(average_err_file)))
 print("***********************************")
-Result_File.write("\n************************************\n")
-Result_File.write("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%\n".format(sum(average_err_file) / len(average_err_file)))
-Result_File.write("\n************************************\n")
+Result_File.write("\nPrediction Using Ensemble - Listed below\n")
+if Num_Of_Models > 1 == True :Ensemble_Result_File.write("\nPrediction Using Ensemble - Listed below\n")
 
+# 위의 결과표시 코드와 동일하지만 예측값 prediction["Squeeze"]을 average_prediction_file[j]로 변경함 - > 이건 잘 안됨
+# 그냥 결과만 표시
+i=0
+for j in range(0, len(labels)):
+    prediction_print = "{0:02d}\t{2}{1:0.2f}\t{3}{4:0.2f}\t{5:0.2f}%".format(
+        j+1,
+        average_prediction_file[j], "## Predict : ", "## Expected : ", labels[j], (abs(average_prediction_file[j] - labels[j]) / labels[j]) * 100)
+    Result_File.write(prediction_print + "\n")
+    if Num_Of_Models > 1 == True:Ensemble_Result_File.write(prediction_print + "\n")
+Result_File.write("\n****************************************\n")
+Result_File.write("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%\n".format(sum(average_err_file) / len(average_err_file)))
+Result_File.write("****************************************\n")
+if Num_Of_Models > 1 == True:
+    Ensemble_Result_File.write("\n****************************************\n")
+    Ensemble_Result_File.write("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%\n".format(sum(average_err_file) / len(average_err_file)))
+    Ensemble_Result_File.write("****************************************\n")
+
+# 앙상블을 쓰더라도 메모리 베이스 예측은 기록 안함 (시료수가 적음)
 
 tf.logging.info(" ***** Memory Base Predictions ***** ")
 Result_File.write("\n ***** Memory Base Predictions ***** \n")
@@ -377,8 +417,8 @@ for k in range(0,Num_Of_Models):
 print("\n")
 Result_File.write("\n\n")
 for k in range(0,Num_Of_Models):
-    print("#{2:d}{0}\t{1:0.2f}%".format(" Model Average Error on Memory : ", error_total_model[k], k))
-    Result_File.write("#{2:d}{0}\t{1:0.2f}%\n".format(" Model Average Error on Memory : ", error_total_model[k], k))
+    print("#{2:02d}{0}\t{1:0.2f}%".format(" Model Average Error on Memory : ", error_total_model[k], k))
+    Result_File.write("#{2:02d}{0}\t{1:0.2f}%\n".format(" Model Average Error on Memory : ", error_total_model[k], k))
 
 #Calculate Average Prediction
 average_prediction = []
@@ -390,6 +430,7 @@ for j in range(len(tmp_values)):
     average_prediction.append(temp_prediction / Num_Of_Models)
     average_err.append(((abs(temp_prediction / Num_Of_Models - mpd.expected_value[j])) / mpd.expected_value[j]) * 100.0)
 
+'''
 print()
 print("average_prediction : ")
 print(average_prediction)
@@ -399,10 +440,28 @@ print(average_err)
 Result_File.write("\n")
 Result_File.write("average_prediction : {}\n".format(average_prediction))
 Result_File.write("average_err : {}\n".format(average_err))
+'''
+
+print()
+print("Prediction Using Ensemble - Listed below")
+Result_File.write("\nPrediction Using Ensemble - Listed below\n")
+for j in range(0, len(average_prediction)):
+    prediction_print = "{0:02d}\t{2}{1:0.2f}\t{3}{4:0.2f}\t{5:0.2f}%".format(
+        j + 1,
+        average_prediction[j], "## Predict : ", "## Expected : ", mpd.expected_value[j],
+        (abs(average_prediction[j] - mpd.expected_value[j]) / mpd.expected_value[j]) * 100)
+    print(prediction_print)
+    Result_File.write(prediction_print + "\n")
 
 average_err_total = 0.0
 for j in range(len(average_err)):
     average_err_total = average_err_total + average_err[j]
+
+print()
+print("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.3f}%".format(average_err_total / len(average_err)))
+Result_File.write("\n****************************************\n")
+Result_File.write("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.3f}%\n".format(average_err_total / len(average_err)))
+Result_File.write("****************************************\n")
 
 tot_rmse = 0.0
 tot_loss = 0.0
@@ -410,24 +469,34 @@ print()
 Result_File.write("\n")
 
 for j in range(0, Num_Of_Models):
-    print("Model #" + str(int(j + 1)) + " : mae [" + "{0:0.5f}".format(mae_values[j]) + "]" + " // loss [" + "{0:0.5f}".format(loss_values[j]) + "]")
-    Result_File.write("Model #" + str(int(j + 1)) + " : mae [" + "{0:0.5f}".format(mae_values[j]) + "]" + " // loss [" + "{0:0.5f}".format(loss_values[j]) + "]\n")
-    tot_rmse = tot_rmse + mae_values[j]
+    print("Model #" + str(int(j + 1)).rjust(3,'0') + " : rmse [" + "{0:0.5f}".format(rmse_values[j]) + "]" + " // loss-mse [" + "{0:0.5f}".format(loss_values[j]) + "]")
+    Result_File.write("Model #" + str(int(j + 1)).rjust(3,'0') + " : rmse [" + "{0:0.5f}".format(rmse_values[j]) + "]" + " // loss-mse [" + "{0:0.5f}".format(loss_values[j]) + "]\n")
+    tot_rmse = tot_rmse + rmse_values[j]
     tot_loss = tot_loss + loss_values[j]
 
 
 print()
 print("Average RMSE for " + str(int(Num_Of_Models)) + " Models : " + str("{0:0.5f}".format(tot_rmse/Num_Of_Models)))
-print("Average LOSS for " + str(int(Num_Of_Models)) + " Models : " + str("{0:0.5f}".format(tot_loss/Num_Of_Models)))
+print("Average LOSS[MSE] for " + str(int(Num_Of_Models)) + " Models : " + str("{0:0.5f}".format(tot_loss/Num_Of_Models)))
 
 Result_File.write("\n")
-Result_File.write("Average RMSE for " + str(int(Num_Of_Models)) + " Models : " + str("{0:0.5f}".format(tot_rmse/Num_Of_Models)) + "\n")
-Result_File.write("Average LOSS for " + str(int(Num_Of_Models)) + " Models : " + str("{0:0.5f}".format(tot_loss/Num_Of_Models)) + "\n")
+Result_File.write("Average RMSE for " + str(int(Num_Of_Models)) + " Models : " + str(
+    "{0:0.5f}".format(tot_rmse/Num_Of_Models)) + "\n")
+Result_File.write("Average LOSS[MSE] for " + str(int(Num_Of_Models)) + " Models : " + str(
+    "{0:0.5f}".format(tot_loss/Num_Of_Models)) + "\n")
+Result_File.write("    --------------------------> Above RMSE/LOSS are for EVALUATION stage\n")
+if Num_Of_Models > 1 == True: #앙상블을 사용한 경우
+    Ensemble_Result_File.write("\n")
+    Ensemble_Result_File.write("Average RMSE for " + str(int(Num_Of_Models)) + " Models : " + str(
+        "{0:0.5f}".format(tot_rmse / Num_Of_Models)) + "\n")
+    Ensemble_Result_File.write("Average LOSS[MSE] for " + str(int(Num_Of_Models)) + " Models : " + str(
+        "{0:0.5f}".format(tot_loss / Num_Of_Models)) + "\n")
+    Ensemble_Result_File.write("    --------------------------> Above RMSE/LOSS are for EVALUATION stage\n")
 
 # total average error
 #print("\n{0}\t{1:0.2f}%".format("Total Model Average Error : ", average_err_total / len(average_err)))
-print("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.3f}%".format(average_err_total / len(average_err)))
-Result_File.write("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.3f}%\n".format(average_err_total / len(average_err)))
+#print("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.3f}%".format(average_err_total / len(average_err)))
+#Result_File.write("Average ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.3f}%\n".format(average_err_total / len(average_err)))
 
 print("\n***************************************************")
 print("** Number of Models : " + str(args.model))
@@ -447,7 +516,7 @@ Result_File.write("***************************************************\n")
 Result_File.write("\n ******************************************************** Total End of Job ******************************************************** \n\n")
 
 Result_File.close()
-
+if Num_Of_Models > 1 == True: Ensemble_Result_File.close() #앙상블을 사용한 경우
 #=======================================================================================================================
 #=======================================================================================================================
 #=======================================================================================================================
