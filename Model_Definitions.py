@@ -22,8 +22,16 @@ feature_names = ['vehicle', 'Mp01', 'Mp02', 'Mp03', 'Mp04', 'Mp05', 'Mp06', 'Mp0
 
 vehicle = tf.feature_column.categorical_column_with_vocabulary_list('vehicle', ['Small', 'Mid', 'RV'])
 feature_columns = [tf.feature_column.indicator_column(vehicle)]
-for k in range(1,13):
+
+# 원래 feature columns
+#for k in range(1,13):
+#    feature_columns.append(tf.feature_column.numeric_column(feature_names[k]))
+
+# Bucket 및 Crossed Column 테스트 용
+for k in range(1,12):
     feature_columns.append(tf.feature_column.numeric_column(feature_names[k]))
+temp_numeric_column = tf.feature_column.numeric_column(feature_names[12])
+feature_columns.append(tf.feature_column.bucketized_column(source_column=temp_numeric_column, boundaries=list(range(5,21,1))))
 
 def reduce_var(x, axis=None, keepdims=False):
     m = tf.reduce_mean(x,axis=axis, keep_dims=True)

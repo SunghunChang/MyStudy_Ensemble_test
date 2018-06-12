@@ -59,13 +59,13 @@ def str2bool(v):
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--epoch', type=int, default=500, help='Number of Train Epoch. Default : 500')
-parser.add_argument('--shuffle', type=int, default=256, help='Number of Train shuffle. Default : 256')
-parser.add_argument('--batch', type=int, default=32, help='Number of Train batch size. Default : 32')
-parser.add_argument('--model', type=int, default=2, help='Number of Train Model. Default : 2')
-parser.add_argument('--chkpt', type=int, default=1000, help='Save Check Point Every N steps and Display Custom Logging Every N Iter. Default : 1000')
-parser.add_argument('--chkptnum', type=int, default=10, help='Maximum Check Point Files that will be saved. Default : 10')
-parser.add_argument('--wbplot', type=str2bool, default=True, help='Visualization of Weight and Bias at end of Training. Default : True')
+parser.add_argument('--model', type=int, default=2, help='Number of Train Model. \n[생성할 심층신경망 모델의 수] Default : 2')
+parser.add_argument('--epoch', type=int, default=500, help='Number of Train Epoch. \n[Training 데이터를 반복하는 횟수] Default : 500')
+parser.add_argument('--shuffle', type=int, default=256, help='Number of Train shuffle. \n[데이터 랜덤화 갯수 (1이면 하지않음)] Default : 256')
+parser.add_argument('--batch', type=int, default=32, help='Number of Train batch size. \n[1 Step 당 읽어들이는 데이터 세트] Default : 32')
+parser.add_argument('--chkpt', type=int, default=1000, help='Save Check Point Every N steps and Display Custom Logging Every N Iter. \n[Check Point 저장 간격 및 Logging 간격 (Step으로 지정)] Default : 1000')
+parser.add_argument('--chkptnum', type=int, default=10, help='Maximum Check Point Files that will be saved. \n[저장할 Check Point 파일수] Default : 10')
+parser.add_argument('--wbplot', type=str2bool, default=True, help='Visualization of Weight and Bias at end of Training. \n[신경망 Weight Map 및 Bias Map을 보여줌] Default : True')
 args = parser.parse_args()
 # print(args.epoch)
 
