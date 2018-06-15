@@ -5,3 +5,5 @@
 20180427_RC_Populated_DATA_Isolated_Train.csv
 IsolatedTEST.csv
 -> Test와 Train 완전 분리
+
+20180614 --> 형상정보까지 포함한 데이터들
