@@ -292,6 +292,7 @@ Result_File.write("\n ***** Prediction on test file ***** \n")
 
 total_file_predictions = []
 error_for_each_model = []
+std_predict_for_each_model = []
 for k in range(0,Num_Of_Models):
     tf.logging.info(" *****        {}st MODEL        ***** ".format(str(k + 1)))
     Result_File.write(" *****        {}st MODEL        ***** \n".format(str(k + 1)))
@@ -319,10 +320,14 @@ for k in range(0,Num_Of_Models):
         print(prediction_print + "\n\t" + prediction_print_shape)
         Result_File.write(prediction_print + "\n\t" + prediction_print_shape + "\n")
         temp_predict.append(prediction["Squeeze"])
+
         i = i + 1
+    std_predict_for_each_model.append(np.array(temp_predict).std()) # 예측값의 표준편차
     total_file_predictions.append(temp_predict)
-    print("Model #{0} Average Error on File Inputs : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)))
-    Result_File.write("\nModel #{0} Average Error on File Inputs : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)) + "\n\n")
+    print("Model #{0} Average Error on File Inputs        : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)))
+    print("Model #{0} Standard Dev. Output on File Inputs : {1:0.2f}".format(str(k+1),std_predict_for_each_model[k]))
+    Result_File.write("\nModel #{0} Average Error on File Inputs       : {1:0.2f}%".format(str(k+1), sum(error_file)/len(error_file)))
+    Result_File.write("\nModel #{0} Standard Dev. Output on File Inputs : {1:0.2f}".format(str(k+1),std_predict_for_each_model[k]) + "\n\n")
     error_for_each_model.append(sum(error_file)/len(error_file))
 
 # For Total Models / 전체 모델에 대한 종합 결과
@@ -352,12 +357,13 @@ if Num_Of_Models > 1 == True :
     Ensemble_Result_File.write("\n")
 
 for z in range(0,len(error_for_each_model)):
-    if Num_Of_Models > 1 == True:Ensemble_Result_File.write("Model #{0} Error : {1:0.2f}%\n".format(str(z+1), error_for_each_model[z]))
-    Result_File.write("Model #{0} Error : {1:0.2f}%\n".format(str(z+1), error_for_each_model[z]))
-    print("Model #{0} Error : {1:0.2f}%".format(str(z+1), error_for_each_model[z]))
+    if Num_Of_Models > 1 == True:Ensemble_Result_File.write("Model #{0} Error : {1:0.2f}%  //  Output.Std.Dev. : {2:0.2f}\n".format(str(z+1), error_for_each_model[z],std_predict_for_each_model[z]))
+    Result_File.write("Model #{0} Error : {1:0.2f}%  //  Output.Std.Dev. : {2:0.2f}\n".format(str(z+1), error_for_each_model[z],std_predict_for_each_model[z]))
+    print("Model #{0} Error : {1:0.2f}%  //  Output.Std.Dev. : {2:0.2f}".format(str(z+1), error_for_each_model[z],std_predict_for_each_model[z]))
 
 print("***********************************")
 print("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%".format(sum(average_err_file) / len(average_err_file)))
+print("            - Output. Std.Dev. : {0:0.2f}".format(np.array(average_prediction_file).std()))
 print("***********************************")
 Result_File.write("\nPrediction Using Ensemble - Listed below\n")
 if Num_Of_Models > 1 == True :Ensemble_Result_File.write("\nPrediction Using Ensemble - Listed below\n")
@@ -373,10 +379,12 @@ for j in range(0, len(labels)):
     if Num_Of_Models > 1 == True:Ensemble_Result_File.write(prediction_print + "\n")
 Result_File.write("\n****************************************\n")
 Result_File.write("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%\n".format(sum(average_err_file) / len(average_err_file)))
+Result_File.write("            - Output. Std.Dev. : {0:0.2f}\n".format(np.array(average_prediction_file).std()))
 Result_File.write("****************************************\n")
 if Num_Of_Models > 1 == True:
     Ensemble_Result_File.write("\n****************************************\n")
     Ensemble_Result_File.write("Ensemble ERROR for " + str(int(Num_Of_Models)) + " Models : " + "{0:0.2f}%\n".format(sum(average_err_file) / len(average_err_file)))
+    Ensemble_Result_File.write("            - Output. Std.Dev. : {0:0.2f}\n".format(np.array(average_prediction_file).std()))
     Ensemble_Result_File.write("****************************************\n")
 
 # 메모리 베이스 예측은 기록 안함 (입력하기 귀찮음)

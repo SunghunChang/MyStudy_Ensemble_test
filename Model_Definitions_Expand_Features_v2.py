@@ -124,13 +124,14 @@ def my_model_fn(
     #with tf.variable_scope('Model_' + params["model_identifier"] + '_Layers'):
     with tf.variable_scope('Model_Layer_Informations'):
         regularizer = tf.keras.regularizers.l2(l=0.01)
-        initializer = tf.keras.initializers.glorot_normal(seed=None)
+        #initializer = tf.keras.initializers.glorot_normal(seed=None)
+        initializer = tf.contrib.layers.xavier_initializer()
         #regularizer = None
         #initializer = None
         input_layer = tf.feature_column.input_layer(features, params["feature_columns"])
         # h1 = tf.layers.dense(input_layer, units=30)
         h1 = tf.layers.Dense(units=30,
-                             activation=None, #tf.nn.relu,
+                             activation=tf.nn.relu,
                              kernel_initializer = initializer,
                              kernel_regularizer = regularizer,
                              activity_regularizer = None,
@@ -140,7 +141,7 @@ def my_model_fn(
         h1 = tf.layers.batch_normalization(h1, training=mode == tf.estimator.ModeKeys.TRAIN)
         h1 = tf.nn.relu(h1)
         h2 = tf.layers.Dense(units=30,
-                             activation=None, #tf.nn.relu,
+                             activation=tf.nn.relu,
                              kernel_initializer = initializer,
                              kernel_regularizer = regularizer,
                              activity_regularizer = None,
@@ -150,7 +151,7 @@ def my_model_fn(
         h2 = tf.layers.batch_normalization(h2, training=mode == tf.estimator.ModeKeys.TRAIN)
         h2 = tf.nn.relu(h2)
         h3 = tf.layers.Dense(units=30,
-                             activation=None, #tf.nn.relu,
+                             activation=tf.nn.relu,
                              kernel_initializer = initializer,
                              kernel_regularizer = regularizer,
                              activity_regularizer = None,
@@ -170,18 +171,9 @@ def my_model_fn(
                    'B': features['B'], 'B_Ang_X': features['B_Ang_X'], 'B_Ang_Y': features['B_Ang_Y'],
                    'R': features['R'], 'R_Ang_X': features['R_Ang_X'], 'R_Ang_Z': features['R_Ang_Z'],
                    'BU': features['BU'],
-                   'MP01': features['Mp01'],
-                   'MP02': features['Mp02'],
-                   'MP03': features['Mp03'],
-                   'MP04': features['Mp04'],
-                   'MP05': features['Mp05'],
-                   'MP06': features['Mp06'],
-                   'MP07': features['Mp07'],
-                   'MP08': features['Mp08'],
-                   'MP09': features['Mp09'],
-                   'MP10': features['Mp10'],
-                   'MP11': features['Mp11'],
-                   'MP12': features['Mp12'],
+                   'MP01': features['Mp01'],'MP02': features['Mp02'],'MP03': features['Mp03'],'MP04': features['Mp04'],
+                   'MP05': features['Mp05'],'MP06': features['Mp06'],'MP07': features['Mp07'],'MP08': features['Mp08'],
+                   'MP09': features['Mp09'],'MP10': features['Mp10'],'MP11': features['Mp11'],'MP12': features['Mp12'],
                    'vehicle_type': features['vehicle'],
                    }
 
@@ -275,7 +267,7 @@ def my_model_fn(
     if mode == tf.estimator.ModeKeys.TRAIN:
         with tf.name_scope('Training_Stage'):
             update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
-            with tf.control_dependencies(update_ops):
+            with tf.control_dependencies(update_ops): # batch normalization 사용에 있어서 필수임
                 #optimizer = tf.train.AdamOptimizer(0.001, name="My_Optimizer")
                 train_op = tf.train.AdamOptimizer(0.001, name="My_Optimizer").minimize(loss=average_loss, global_step=tf.train.get_global_step())
 

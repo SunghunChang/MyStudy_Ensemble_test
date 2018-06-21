@@ -44,7 +44,7 @@ def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1,
 	ax4.set_ylabel("bias value")
 	# ax4.axes.get_xaxis().set_ticklabels([])  # It remains grid line
 	# ax4.axes.get_xaxis().set_ticklabels(np.arange(1, len(bias_layer_1) + 1, 1))
-	ax4.set_ylim(-0.4, 0.4)
+	ax4.set_ylim(-1.0, 1.0)
 	ax4.axes.get_yaxis().set_ticklabels(np.arange(-0.5, 0.6, 0.1))
 	ax4.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
 	ax4.plot(bias_layer_1, color='b', marker=".", label="Model " + str(k + 1) + " - Layer 1", linestyle="--")
@@ -57,7 +57,7 @@ def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1,
 	# ax5.axes.get_xaxis().set_ticklabels([])  # It remains grid line
 	# ax5.axes.get_xaxis().set_ticklabels(np.arange(1, len(bias_layer_2) + 1, 1))
 	# ax5.axes.get_yaxis().set_ticklabels(np.arange(-0.5, 0.6, 0.1))
-	ax5.set_ylim(-0.4, 0.4)
+	ax5.set_ylim(-1.0, 1.0)
 	ax5.yaxis.set_ticklabels(np.arange(-0.5, 0.6, 0.1))
 	ax5.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
 	ax5.plot(bias_layer_2, color='b', marker=".", label="Model " + str(k + 1) + " - Layer 2", linestyle="--")
@@ -69,7 +69,7 @@ def PlotWeighNbias(weight_layer_1, weight_layer_2, weight_layer_3, bias_layer_1,
 	ax6.set_ylabel("bias value")
 	# ax6.axes.get_xaxis().set_ticklabels([])  # It remains grid line
 	# ax6.axes.get_xaxis().set_ticklabels(np.arange(1, len(bias_layer_3) + 1, 1))
-	ax6.set_ylim(-0.4, 0.4)
+	ax6.set_ylim(-1.0, 1.0)
 	ax6.axes.get_yaxis().set_ticklabels(np.arange(-0.5, 0.6, 0.1))
 	ax6.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
 	ax6.plot(bias_layer_3, color='b', marker=".", label="Model " + str(k + 1) + " - Layer 3", linestyle="--")

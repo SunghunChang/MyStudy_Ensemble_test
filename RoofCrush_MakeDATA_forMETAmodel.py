@@ -42,7 +42,8 @@ if Num_Of_Models == 1:
     sys.exit(1)
 
 PATH_DATASET = "./dataset"
-FILE_PRACTICE = PATH_DATASET + os.sep + "20180614_Roof_Rev05_Shuffle_for_Test_98EA.csv"
+FILE_PRACTICE = PATH_DATASET + os.sep + "20180614_Roof_Rev05_Shuffle_for_Train_482EA.csv"
+#FILE_PRACTICE = PATH_DATASET + os.sep + "20180614_Roof_Rev05_Shuffle_for_Test_98EA.csv"
 
 print()
 print("        ************************************************** ")
@@ -72,7 +73,7 @@ feature_list = []
 
 print("   ##  Restore and Build Neural Network Model from CheckPoint  ##\n")
 
-_, tmp_labels = models.my_input_fn(FILE_PRACTICE, repeat_count=1, batch_size=100, shuffle_count=1)
+_, tmp_labels = models.my_input_fn(FILE_PRACTICE, repeat_count=1, batch_size=500, shuffle_count=1)
 with tf.Session() as sess:
     labels = sess.run(tmp_labels) #Extract Tensor to List
 
